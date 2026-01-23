@@ -1,0 +1,548 @@
+// GUenARK Tourism & Heritage Platform - Database Schema
+// Using PostgreSQL
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+// ============================================
+// USER & AUTHENTICATION
+// ============================================
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  password      String?
+  avatarUrl     String?
+  role          UserRole  @default(TRAVELER)
+  preferences   Json?
+  emailVerified DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts   Account[]
+  sessions   Session[]
+  articles   Article[]
+  itineraries Itinerary[]
+  guideProfile LocalGuide?
+  reviews    Review[]
+
+  @@map("users")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+enum UserRole {
+  TRAVELER
+  GUIDE
+  ARTISAN
+  COMMUNITY_ADMIN
+  ADMIN
+}
+
+// ============================================
+// DESTINATIONS & GEOGRAPHY
+// ============================================
+
+model Destination {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String   @db.Text
+  latitude    Float
+  longitude   Float
+  region      String
+  state       String
+  country     String   @default("India")
+  heroImage   String?
+  images      String[]
+  howToReach  Json?    // { airport: {...}, railway: {...}, bus: {...}, selfDrive: {...} }
+  bestTime    Json?    // { peak: [...], offPeak: [...], avoid: [...] }
+  highlights  String[]
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  pois          POI[]
+  heritageTrails HeritageTrail[]
+  stays         Stay[]
+  artisans      Artisan[]
+  localGuides   LocalGuide[]
+  cbtVillages   CBTVillage[]
+  seasonality   Seasonality[]
+  itineraries   Itinerary[]
+  articles      Article[]
+
+  @@map("destinations")
+}
+
+// ============================================
+// POINTS OF INTEREST (POIs)
+// ============================================
+
+model POI {
+  id                  String   @id @default(cuid())
+  destinationId       String
+  name                String
+  slug                String   @unique
+  category            POICategory
+  description         String   @db.Text
+  culturalSignificance String?  @db.Text
+  latitude            Float
+  longitude           Float
+  images              String[]
+  audioGuideUrl       String?
+  videoUrl            String?
+  timings             Json?    // { monday: { open: "09:00", close: "17:00" }, ... }
+  entryFee            Json?    // { indian: 50, foreigner: 200, child: 25 }
+  dressCodes          String[]
+  restrictions        String[]
+  safetyTips          String[]
+  culturalNorms       String[]
+  healthAdvisories    String[]
+  environmentalRules  String[]
+  averageVisitTime    Int?     // in minutes
+  isVerified          Boolean  @default(false)
+  isActive            Boolean  @default(true)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  destination   Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+  trailStops    TrailStop[]
+  reviews       Review[]
+  articleLinks  ArticlePOI[]
+
+  @@index([destinationId])
+  @@index([category])
+  @@map("pois")
+}
+
+enum POICategory {
+  TEMPLE
+  FORT
+  PALACE
+  MUSEUM
+  MONUMENT
+  NATURE
+  MARKET
+  CULTURAL_CENTER
+  ARCHAEOLOGICAL
+  RELIGIOUS
+  VIEWPOINT
+  WATER_BODY
+  GARDEN
+  OTHER
+}
+
+// ============================================
+// HERITAGE TRAILS
+// ============================================
+
+model HeritageTrail {
+  id              String   @id @default(cuid())
+  destinationId   String
+  name            String
+  slug            String   @unique
+  description     String   @db.Text
+  theme           String   // e.g., "Royal Heritage", "Spiritual Journey", "Ancient Architecture"
+  durationMinutes Int
+  distanceKm      Float
+  difficulty      TrailDifficulty
+  routeGeoJson    Json?    // GeoJSON LineString for the trail route
+  images          String[]
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  destination Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+  stops       TrailStop[]
+
+  @@index([destinationId])
+  @@map("heritage_trails")
+}
+
+model TrailStop {
+  id          String @id @default(cuid())
+  trailId     String
+  poiId       String
+  order       Int
+  notes       String?
+  durationMin Int?
+
+  trail HeritageTrail @relation(fields: [trailId], references: [id], onDelete: Cascade)
+  poi   POI           @relation(fields: [poiId], references: [id], onDelete: Cascade)
+
+  @@unique([trailId, order])
+  @@map("trail_stops")
+}
+
+enum TrailDifficulty {
+  EASY
+  MODERATE
+  CHALLENGING
+}
+
+// ============================================
+// ACCOMMODATIONS & STAYS
+// ============================================
+
+model Stay {
+  id            String    @id @default(cuid())
+  destinationId String
+  name          String
+  slug          String    @unique
+  type          StayType
+  description   String    @db.Text
+  latitude      Float
+  longitude     Float
+  priceMin      Float
+  priceMax      Float
+  currency      String    @default("INR")
+  amenities     String[]
+  ecoPractices  String[]
+  images        String[]
+  bookingUrl    String?
+  contactPhone  String?
+  contactEmail  String?
+  contactWhatsapp String?
+  rating        Float?
+  reviewCount   Int       @default(0)
+  isHomestay    Boolean   @default(false)
+  isVerified    Boolean   @default(false)
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  destination Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+  reviews     Review[]
+
+  @@index([destinationId])
+  @@index([type])
+  @@map("stays")
+}
+
+enum StayType {
+  HOTEL
+  HOMESTAY
+  HOSTEL
+  RESORT
+  GUESTHOUSE
+  DHARAMSHALA
+  CAMPING
+}
+
+// ============================================
+// LOCAL ARTISANS
+// ============================================
+
+model Artisan {
+  id               String   @id @default(cuid())
+  destinationId    String
+  name             String
+  craftType        String
+  story            String   @db.Text
+  latitude         Float
+  longitude        Float
+  images           String[]
+  products         String[]
+  workshopAvailable Boolean @default(false)
+  workshopDetails  String?
+  contactPhone     String?
+  contactWhatsapp  String?
+  contactEmail     String?
+  isVerified       Boolean  @default(false)
+  isActive         Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  destination Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+
+  @@index([destinationId])
+  @@map("artisans")
+}
+
+// ============================================
+// LOCAL GUIDES
+// ============================================
+
+model LocalGuide {
+  id            String   @id @default(cuid())
+  userId        String?  @unique
+  destinationId String
+  name          String
+  bio           String   @db.Text
+  languages     String[]
+  expertise     String[]
+  pricePerDay   Float
+  currency      String   @default("INR")
+  availableDays String[] // ["monday", "tuesday", ...]
+  contactPhone  String
+  contactWhatsapp String?
+  avatarUrl     String?
+  images        String[]
+  rating        Float?
+  reviewCount   Int      @default(0)
+  isVerified    Boolean  @default(false)
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user        User?       @relation(fields: [userId], references: [id])
+  destination Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+  reviews     Review[]
+
+  @@index([destinationId])
+  @@map("local_guides")
+}
+
+// ============================================
+// COMMUNITY-BASED TOURISM (CBT) VILLAGES
+// ============================================
+
+model CBTVillage {
+  id            String   @id @default(cuid())
+  destinationId String
+  name          String
+  slug          String   @unique
+  story         String   @db.Text
+  culture       String   @db.Text
+  festivals     Json[]   // [{ name: "...", month: "...", description: "..." }]
+  latitude      Float
+  longitude     Float
+  images        String[]
+  homestays     Json[]   // [{ name: "...", capacity: 4, pricePerNight: 1500, ... }]
+  foodOptions   Json[]   // [{ name: "...", type: "veg", price: 200, ... }]
+  workshops     Json[]   // [{ name: "...", craft: "...", duration: 120, price: 500, ... }]
+  tours         Json[]   // [{ name: "...", description: "...", duration: 180, price: 300, ... }]
+  contactEmail  String?
+  contactWhatsapp String?
+  contactPhone  String?
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  destination Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+
+  @@index([destinationId])
+  @@map("cbt_villages")
+}
+
+// ============================================
+// USER-GENERATED CONTENT - ARTICLES
+// ============================================
+
+model Article {
+  id                String        @id @default(cuid())
+  authorId          String
+  destinationId     String?
+  title             String
+  slug              String        @unique
+  excerpt           String?
+  content           String        @db.Text
+  coverImage        String?
+  tags              String[]
+  travelDate        DateTime?
+  season            String?
+  budgetLevel       BudgetLevel?
+  status            ArticleStatus @default(DRAFT)
+  viewCount         Int           @default(0)
+  likeCount         Int           @default(0)
+  isFeatured        Boolean       @default(false)
+  publishedAt       DateTime?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  author      User          @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  destination Destination?  @relation(fields: [destinationId], references: [id])
+  linkedPois  ArticlePOI[]
+
+  @@index([authorId])
+  @@index([destinationId])
+  @@index([status])
+  @@map("articles")
+}
+
+model ArticlePOI {
+  id        String @id @default(cuid())
+  articleId String
+  poiId     String
+
+  article Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  poi     POI     @relation(fields: [poiId], references: [id], onDelete: Cascade)
+
+  @@unique([articleId, poiId])
+  @@map("article_pois")
+}
+
+enum ArticleStatus {
+  DRAFT
+  PENDING_REVIEW
+  PUBLISHED
+  REJECTED
+  ARCHIVED
+}
+
+enum BudgetLevel {
+  BUDGET
+  MID_RANGE
+  PREMIUM
+  LUXURY
+}
+
+// ============================================
+// ITINERARIES & TRIP PLANNING
+// ============================================
+
+model Itinerary {
+  id            String      @id @default(cuid())
+  userId        String
+  destinationId String
+  title         String
+  description   String?
+  durationDays  Int
+  dayPlans      Json        // [{ day: 1, activities: [...], notes: "..." }]
+  budgetLevel   BudgetLevel?
+  estimatedCost Float?
+  isPublic      Boolean     @default(false)
+  likeCount     Int         @default(0)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  destination Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([destinationId])
+  @@map("itineraries")
+}
+
+// ============================================
+// SEASONALITY & BEST TIME
+// ============================================
+
+model Seasonality {
+  id              String   @id @default(cuid())
+  destinationId   String
+  month           Int      // 1-12
+  weather         String
+  temperature     Json?    // { min: 15, max: 32, unit: "C" }
+  rainfall        String?
+  crowdLevel      CrowdLevel
+  priceTrend      PriceTrend
+  festivals       String[]
+  events          String[]
+  recommendations String   @db.Text
+  whatToPack      String[]
+
+  destination Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+
+  @@unique([destinationId, month])
+  @@map("seasonality")
+}
+
+enum CrowdLevel {
+  LOW
+  MODERATE
+  HIGH
+  PEAK
+}
+
+enum PriceTrend {
+  LOW
+  MODERATE
+  HIGH
+  PEAK
+}
+
+// ============================================
+// REVIEWS & RATINGS
+// ============================================
+
+model Review {
+  id          String     @id @default(cuid())
+  userId      String
+  rating      Int        // 1-5
+  title       String?
+  content     String     @db.Text
+  images      String[]
+  poiId       String?
+  stayId      String?
+  guideId     String?
+  isVerified  Boolean    @default(false)
+  status      ReviewStatus @default(PENDING)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  user   User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  poi    POI?        @relation(fields: [poiId], references: [id])
+  stay   Stay?       @relation(fields: [stayId], references: [id])
+  guide  LocalGuide? @relation(fields: [guideId], references: [id])
+
+  @@index([userId])
+  @@map("reviews")
+}
+
+enum ReviewStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+// ============================================
+// CHAT HISTORY (for AI Assistant)
+// ============================================
+
+model ChatSession {
+  id        String   @id @default(cuid())
+  sessionId String   @unique
+  messages  Json[]
+  context   Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("chat_sessions")
+}
