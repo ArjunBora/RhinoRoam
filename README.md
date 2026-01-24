@@ -1,4 +1,4 @@
-# AxomConnect - Discover Assam Through Local Eyes
+# RhinoRoam - Discover Assam Through Local Eyes
 
 <div align="center">
   <img src="public/logo.png" alt="AxomConnect Logo" width="120" />
@@ -13,13 +13,13 @@
 
 ---
 
-## 🌿 Vision
+##  Vision
 
 AxomConnect transforms how travelers discover Assam - moving beyond conventional tourism to create meaningful connections with local communities. We empower local guides, artisans, homestay owners, and cultural ambassadors to share their authentic stories while ensuring tourism benefits reach the grassroots.
 
 ---
 
-## ✨ Key Features
+##  Key Features
 
 ### 🏠 For Travelers
 - **Curated Experiences** - Wildlife safaris, tea trails, tribal immersions, river journeys
@@ -28,7 +28,7 @@ AxomConnect transforms how travelers discover Assam - moving beyond conventional
 - **Festivals Calendar** - Never miss Bihu, Bwisagu, Ali Aye Ligang, or any festival
 - **District Explorer** - Discover all 35 districts of Assam
 
-### 👥 For Hosts
+###  For Hosts
 - **Easy Registration** - 4-step application process
 - **Profile Dashboard** - Manage experiences, bookings, and reviews
 - **Verification Badge** - Build trust with verified host status
@@ -36,11 +36,11 @@ AxomConnect transforms how travelers discover Assam - moving beyond conventional
 
 ---
 
-## 🏛️ Architecture
+##  Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                      AxomConnect Platform                    │
+│                      RhinoRoam Platform                    │
 ├─────────────────────────────────────────────────────────────┤
 │                                                              │
 │  ┌─────────────┐   ┌─────────────┐   ┌─────────────┐       │
@@ -61,7 +61,7 @@ AxomConnect transforms how travelers discover Assam - moving beyond conventional
 
 ---
 
-## 🎨 Design System
+##  Design System
 
 Our design system draws inspiration from Assam's rich cultural heritage:
 
@@ -79,7 +79,7 @@ Our design system draws inspiration from Assam's rich cultural heritage:
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```
 src/
@@ -121,7 +121,7 @@ src/
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 - Node.js 18+
@@ -132,8 +132,8 @@ src/
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/axomconnect.git
-cd axomconnect
+git clone https://github.com/your-org/RhinoRoam.git
+cd Rhino Roam
 
 # Install dependencies
 npm install
@@ -178,7 +178,7 @@ NEXT_PUBLIC_MAPBOX_TOKEN="your-mapbox-token"
 
 ---
 
-## 📱 Pages Overview
+##  Pages Overview
 
 | Page | Route | Description |
 |------|-------|-------------|
@@ -196,7 +196,7 @@ NEXT_PUBLIC_MAPBOX_TOKEN="your-mapbox-token"
 
 ---
 
-## 🗓️ Featured Festivals
+##  Featured Festivals
 
 | Festival | Month | Type | Community |
 |----------|-------|------|-----------|
@@ -213,7 +213,7 @@ NEXT_PUBLIC_MAPBOX_TOKEN="your-mapbox-token"
 
 ---
 
-## 🧪 API Endpoints
+##  API Endpoints
 
 | Endpoint | Method | Description |
 |----------|--------|-------------|
@@ -228,9 +228,9 @@ NEXT_PUBLIC_MAPBOX_TOKEN="your-mapbox-token"
 
 ---
 
-## 📅 Roadmap
+##  Roadmap
 
-### ✅ Phase 1: Foundation (Complete)
+###  Phase 1: Foundation (Complete)
 - [x] Design system with Assam-inspired aesthetics
 - [x] Homepage with story-driven layout  
 - [x] Festivals calendar with 23+ festivals
@@ -250,7 +250,7 @@ NEXT_PUBLIC_MAPBOX_TOKEN="your-mapbox-token"
 - [ ] Email notifications
 - [ ] Reviews system
 
-### 📋 Phase 3: Advanced Features (Planned)
+###  Phase 3: Advanced Features (Planned)
 - [ ] Host dashboard
 - [ ] User dashboard with bookings
 - [ ] Map-based district exploration
@@ -260,7 +260,7 @@ NEXT_PUBLIC_MAPBOX_TOKEN="your-mapbox-token"
 
 ---
 
-## 🤝 Contributing
+##  Contributing
 
 We welcome contributions! Please read our [Contributing Guide](CONTRIBUTING.md) for details.
 
@@ -270,24 +270,14 @@ We welcome contributions! Please read our [Contributing Guide](CONTRIBUTING.md) 
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
----
 
-## 📜 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 - **Assam Tourism** - For inspiring this project
 - **Local Communities** - For sharing their stories and traditions
 - **Contributors** - For making this platform possible
 
----
-
-<div align="center">
-  <p>Made with ❤️ in Assam 🍵</p>
   <p>
     <a href="https://axomconnect.com">Website</a> •
     <a href="https://twitter.com/axomconnect">Twitter</a> •
