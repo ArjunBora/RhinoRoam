@@ -1,8 +1,5 @@
 # RhinoRoam - Discover Assam Through Local Eyes
 
-<div align="center">
-  <img src="public/logo.png" alt="AxomConnect Logo" width="120" />
-  
   **AxomConnect** is a community-powered tourism platform connecting travelers with authentic Assam experiences. Built with passion for Assam's cultural heritage, natural beauty, and the warmth of its communities.
 
 ---
@@ -15,7 +12,7 @@ AxomConnect transforms how travelers discover Assam - moving beyond conventional
 
 ##  Key Features
 
-### 🏠 For Travelers
+###  For Travelers
 - **Curated Experiences** - Wildlife safaris, tea trails, tribal immersions, river journeys
 - **Community Hosts** - Connect directly with verified local guides and homestays
 - **AI Trip Planner** - Personalized itinerary generation
