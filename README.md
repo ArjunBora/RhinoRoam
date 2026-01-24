@@ -52,24 +52,6 @@ AxomConnect transforms how travelers discover Assam - moving beyond conventional
 
 ---
 
-##  Design System
-
-Our design system draws inspiration from Assam's rich cultural heritage:
-
-| Element | Colors | Inspiration |
-|---------|--------|-------------|
-| **Tea Garden** | `#1B4D2E` → `#7CB342` | Lush tea gardens of Upper Assam |
-| **Brahmaputra** | `#0D3B4C` → `#B8D4DB` | The mighty river |
-| **Muga Gold** | `#C9A227` | Assam's golden Muga silk |
-| **Mekhela Red** | `#B71C1C` | Traditional Mekhela Sador |
-| **Gamusa Pattern** | Decorative borders | Assamese gamusa motifs |
-
-### Typography
-- **Headings**: Lora (serif) - Elegant, cultural
-- **Body**: Nunito (sans-serif) - Clear, modern
-
----
-
 ##  Project Structure
 
 ```
