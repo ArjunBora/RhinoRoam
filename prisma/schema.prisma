@@ -33,6 +33,7 @@ model User {
   itineraries Itinerary[]
   guideProfile LocalGuide?
   reviews    Review[]
+  communityHost CommunityHost? @relation("HostUser")
 
   @@map("users")
 }
@@ -546,3 +547,367 @@ model ChatSession {
 
   @@map("chat_sessions")
 }
+
+// ============================================
+// ASSAM-SPECIFIC: DISTRICTS
+// ============================================
+
+model District {
+  id           String   @id @default(cuid())
+  name         String
+  nameAssamese String?
+  slug         String   @unique
+  region       DistrictRegion
+  headquarters String?
+  description  String   @db.Text
+  highlights   String[]
+  specialties  String[]
+  heroImage    String?
+  images       String[]
+  latitude     Float?
+  longitude    Float?
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  experiences     Experience[]
+  communityHosts  CommunityHost[]
+  festivals       Festival[]
+
+  @@map("districts")
+}
+
+enum DistrictRegion {
+  UPPER_ASSAM
+  CENTRAL_ASSAM
+  LOWER_ASSAM
+  BTR
+  HILL_DISTRICTS
+  BARAK_VALLEY
+}
+
+// ============================================
+// ASSAM-SPECIFIC: EXPERIENCES
+// ============================================
+
+model Experience {
+  id              String   @id @default(cuid())
+  hostId          String
+  districtId      String
+  title           String
+  slug            String   @unique
+  tagline         String?
+  description     String   @db.Text
+  category        ExperienceCategory
+  subcategory     String?
+  images          String[]
+  duration        String   // e.g., "2 Days / 1 Night"
+  durationHours   Int?
+  difficulty      ExperienceDifficulty @default(EASY)
+  groupSizeMin    Int      @default(1)
+  groupSizeMax    Int      @default(10)
+  languages       String[]
+  
+  // Pricing
+  price           Float
+  priceType       PriceType @default(PER_PERSON)
+  currency        String    @default("INR")
+  
+  // Details
+  highlights      String[]
+  included        String[]
+  notIncluded     String[]
+  requirements    String[]
+  itinerary       Json?    // [{ day: 1, title: "...", activities: [...] }]
+  
+  // Seasonality
+  bestSeason      String?
+  seasonInfo      Json?    // { peak: [...], good: [...], closed: [...] }
+  weather         Json?    // { winter: {...}, spring: {...}, monsoon: {...} }
+  
+  // Status
+  rating          Float    @default(0)
+  reviewCount     Int      @default(0)
+  isFeatured      Boolean  @default(false)
+  isNewlyAdded    Boolean  @default(false)
+  isActive        Boolean  @default(true)
+  
+  // Sustainability
+  sustainability  String[]
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  host            CommunityHost  @relation(fields: [hostId], references: [id], onDelete: Cascade)
+  district        District       @relation(fields: [districtId], references: [id], onDelete: Cascade)
+  reviews         ExperienceReview[]
+  bookings        ExperienceBooking[]
+  collectionExperiences CollectionExperience[]
+
+  @@index([hostId])
+  @@index([districtId])
+  @@index([category])
+  @@map("experiences")
+}
+
+enum ExperienceCategory {
+  WILDLIFE
+  TEA
+  RIVER
+  TRIBAL
+  HANDLOOM
+  ADVENTURE
+  HERITAGE
+  CULINARY
+  SPIRITUAL
+  PHOTOGRAPHY
+}
+
+enum ExperienceDifficulty {
+  EASY
+  MODERATE
+  CHALLENGING
+}
+
+enum PriceType {
+  PER_PERSON
+  PER_GROUP
+  PER_NIGHT
+}
+
+// ============================================
+// ASSAM-SPECIFIC: COMMUNITY HOSTS
+// ============================================
+
+model CommunityHost {
+  id              String   @id @default(cuid())
+  userId          String?  @unique
+  districtId      String
+  name            String
+  slug            String   @unique
+  type            HostType
+  bio             String   @db.Text
+  avatar          String?
+  coverImage      String?
+  location        String
+  community       String?  // e.g., "Mising", "Bodo", "Karbi"
+  languages       String[]
+  specialties     String[]
+  
+  // Contact
+  phone           String?
+  email           String?
+  whatsapp        String?
+  
+  // Status
+  verified        Boolean  @default(false)
+  superhost       Boolean  @default(false)
+  rating          Float    @default(0)
+  reviewCount     Int      @default(0)
+  yearsHosting    Int      @default(0)
+  responseTime    String?  // e.g., "within 2 hours"
+  responseRate    String?  // e.g., "98%"
+  
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user            User?         @relation("HostUser", fields: [userId], references: [id])
+  district        District      @relation(fields: [districtId], references: [id], onDelete: Cascade)
+  experiences     Experience[]
+
+  @@index([districtId])
+  @@index([type])
+  @@map("community_hosts")
+}
+
+enum HostType {
+  GUIDE
+  HOMESTAY
+  ARTISAN
+  TOUR_OPERATOR
+  CHEF
+  NATURALIST
+  STORYTELLER
+}
+
+// ============================================
+// ASSAM-SPECIFIC: FESTIVALS & EVENTS
+// ============================================
+
+model Festival {
+  id              String   @id @default(cuid())
+  districtId      String?
+  name            String
+  nameAssamese    String?
+  slug            String   @unique
+  type            FestivalType
+  community       String?  // e.g., "Mising", "Bodo", "Karbi", "Ahom"
+  region          String?
+  description     String   @db.Text
+  highlights      String[]
+  
+  // Dates
+  month           Int      // 1-12
+  startDate       DateTime?
+  endDate         DateTime?
+  isVariableDate  Boolean  @default(true)  // True if date changes yearly
+  
+  // Location
+  location        String?
+  latitude        Float?
+  longitude       Float?
+  
+  // Media
+  heroImage       String?
+  images          String[]
+  videoUrl        String?
+  
+  // Status
+  isMajor         Boolean  @default(false)
+  isActive        Boolean  @default(true)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  district        District? @relation(fields: [districtId], references: [id])
+
+  @@index([month])
+  @@index([type])
+  @@index([community])
+  @@map("festivals")
+}
+
+enum FestivalType {
+  STATE
+  TRIBAL
+  RELIGIOUS
+  REGIONAL
+  LOCAL
+  CULTURAL
+}
+
+// ============================================
+// ASSAM-SPECIFIC: COLLECTIONS
+// ============================================
+
+model Collection {
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  subtitle        String?
+  description     String   @db.Text
+  longDescription String?  @db.Text
+  icon            String?
+  color           String?
+  gradient        String?
+  heroImage       String?
+  images          String[]
+  
+  order           Int      @default(0)
+  isFeatured      Boolean  @default(false)
+  isActive        Boolean  @default(true)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  experiences     CollectionExperience[]
+
+  @@map("collections")
+}
+
+model CollectionExperience {
+  id            String   @id @default(cuid())
+  collectionId  String
+  experienceId  String
+  order         Int      @default(0)
+  isFeatured    Boolean  @default(false)
+
+  collection    Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  experience    Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade)
+
+  @@unique([collectionId, experienceId])
+  @@map("collection_experiences")
+}
+
+// ============================================
+// ASSAM-SPECIFIC: EXPERIENCE REVIEWS
+// ============================================
+
+model ExperienceReview {
+  id            String   @id @default(cuid())
+  experienceId  String
+  userId        String
+  rating        Int      // 1-5
+  title         String?
+  text          String   @db.Text
+  images        String[]
+  isVerified    Boolean  @default(false)
+  helpful       Int      @default(0)
+  
+  status        ReviewStatus @default(PENDING)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  experience    Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade)
+
+  @@index([experienceId])
+  @@index([userId])
+  @@map("experience_reviews")
+}
+
+// ============================================
+// ASSAM-SPECIFIC: EXPERIENCE BOOKINGS
+// ============================================
+
+model ExperienceBooking {
+  id              String   @id @default(cuid())
+  experienceId    String
+  userId          String?
+  
+  // Guest Info
+  guestName       String
+  guestEmail      String
+  guestPhone      String
+  guests          Int      @default(1)
+  
+  // Booking Details
+  bookingDate     DateTime
+  totalAmount     Float
+  currency        String   @default("INR")
+  
+  // Payment
+  paymentStatus   PaymentStatus @default(PENDING)
+  paymentId       String?
+  
+  // Status
+  status          BookingStatus @default(PENDING)
+  notes           String?
+  specialRequests String?
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  experience      Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade)
+
+  @@index([experienceId])
+  @@index([userId])
+  @@index([bookingDate])
+  @@map("experience_bookings")
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  REFUNDED
+  FAILED
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+  NO_SHOW
+}
+

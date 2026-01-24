@@ -1,104 +1,152 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Nunito:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 /* ============================================
-   CSS VARIABLES - DESIGN TOKENS
+   AXOM CONNECT - ASSAM TOURISM PLATFORM
+   Design System v2.0 - Assam-Inspired
    ============================================ */
 
 :root {
-  /* Heritage Color Palette */
-  --heritage-gold: #D4A574;
-  --heritage-bronze: #B8860B;
-  --heritage-copper: #CD7F32;
-  --heritage-terracotta: #E2725B;
-  --heritage-rust: #B7410E;
+  /* ========== ASSAM NATURE PALETTE ========== */
 
-  /* Nature Palette */
-  --nature-teal: #2E8B8B;
-  --nature-sage: #87AE73;
-  --nature-forest: #228B22;
-  --nature-ocean: #1E6F8F;
+  /* Tea Garden Colors */
+  --tea-deep: #1B4D2E;
+  /* Deep tea plantation */
+  --tea-garden: #2D5016;
+  /* Tea leaf green */
+  --tea-light: #7CB342;
+  /* Fresh tea shoot */
+  --tea-golden: #D4A574;
+  /* Golden tea liquor */
 
-  /* Neutral Palette */
-  --neutral-50: #FAFAF9;
-  --neutral-100: #F5F5F4;
-  --neutral-200: #E7E5E4;
-  --neutral-300: #D6D3D1;
-  --neutral-400: #A8A29E;
-  --neutral-500: #78716C;
-  --neutral-600: #57534E;
-  --neutral-700: #44403C;
-  --neutral-800: #292524;
-  --neutral-900: #1C1917;
+  /* Brahmaputra River */
+  --brahma-deep: #0D3B4C;
+  /* River at dusk */
+  --brahma-blue: #1E5F74;
+  /* Main river blue */
+  --brahma-light: #4A9BB3;
+  /* Morning river */
+  --brahma-mist: #B8D4DB;
+  /* River mist */
 
-  /* Semantic Colors */
-  --success: #22C55E;
-  --warning: #F59E0B;
-  --error: #EF4444;
-  --info: #3B82F6;
+  /* Forest & Earth */
+  --forest-kaziranga: #1B4D3E;
+  /* Kaziranga forest */
+  --earth-assam: #5D4037;
+  /* Assam soil */
+  --bamboo: #8D6E63;
+  /* Bamboo brown */
+  --elephant-gray: #455A64;
+  /* One-horned rhino */
+
+  /* ========== HANDLOOM & HERITAGE ========== */
+
+  /* Muga Silk */
+  --muga-gold: #C9A227;
+  /* Premium Muga silk */
+  --muga-light: #E6D185;
+  /* Light Muga */
+
+  /* Mekhela Sador */
+  --mekhela-red: #B71C1C;
+  /* Traditional red */
+  --mekhela-maroon: #880E4F;
+  /* Deep maroon */
+
+  /* Eri & Pat Silk */
+  --eri-cream: #F5F0E1;
+  /* Eri silk cream */
+  --pat-white: #FFFEF7;
+  /* Pat silk white */
+
+  /* Gamusa Colors */
+  --gamusa-red: #D32F2F;
+  /* Gamusa border red */
+  --gamusa-white: #FAFAFA;
+  /* Gamusa base */
+
+  /* ========== SEMANTIC PALETTE ========== */
 
   /* Backgrounds */
-  --bg-primary: #FDFCFB;
-  --bg-secondary: #F7F5F3;
+  --bg-primary: #FFFEF7;
+  /* Warm off-white like Pat silk */
+  --bg-secondary: #F5F0E1;
+  /* Eri cream */
   --bg-card: #FFFFFF;
-  --bg-overlay: rgba(28, 25, 23, 0.6);
+  --bg-dark: #0D3B4C;
+  /* Deep Brahmaputra */
+  --bg-overlay: rgba(13, 59, 76, 0.7);
 
   /* Text Colors */
-  --text-primary: #1C1917;
-  --text-secondary: #57534E;
-  --text-muted: #A8A29E;
-  --text-inverse: #FAFAF9;
+  --text-primary: #1A1A1A;
+  --text-secondary: #4A4A4A;
+  --text-muted: #7A7A7A;
+  --text-inverse: #FFFEF7;
+  --text-accent: #1E5F74;
 
   /* Borders */
-  --border-light: #E7E5E4;
-  --border-medium: #D6D3D1;
+  --border-light: #E8E4D9;
+  --border-medium: #D4CFC4;
+  --border-accent: #C9A227;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(28, 25, 23, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(28, 25, 23, 0.1), 0 2px 4px -2px rgba(28, 25, 23, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(28, 25, 23, 0.1), 0 4px 6px -4px rgba(28, 25, 23, 0.1);
-  --shadow-xl: 0 20px 25px -5px rgba(28, 25, 23, 0.1), 0 8px 10px -6px rgba(28, 25, 23, 0.1);
+  /* Status Colors */
+  --success: #2E7D32;
+  /* Forest green */
+  --warning: #F57C00;
+  /* Sunset orange */
+  --error: #C62828;
+  --info: #1E5F74;
+
+  /* ========== SHADOWS & EFFECTS ========== */
+
+  --shadow-sm: 0 1px 3px rgba(27, 77, 62, 0.08);
+  --shadow-md: 0 4px 12px rgba(27, 77, 62, 0.1);
+  --shadow-lg: 0 8px 24px rgba(27, 77, 62, 0.12);
+  --shadow-xl: 0 16px 40px rgba(27, 77, 62, 0.15);
 
   /* Glass Effect */
-  --glass-bg: rgba(255, 255, 255, 0.8);
-  --glass-border: rgba(255, 255, 255, 0.2);
-  --glass-blur: 12px;
+  --glass-bg: rgba(255, 254, 247, 0.85);
+  --glass-border: rgba(201, 162, 39, 0.2);
+  --glass-blur: 16px;
 
-  /* Gradients */
-  --gradient-heritage: linear-gradient(135deg, var(--heritage-gold) 0%, var(--heritage-terracotta) 100%);
-  --gradient-nature: linear-gradient(135deg, var(--nature-teal) 0%, var(--nature-sage) 100%);
-  --gradient-hero: linear-gradient(180deg, transparent 0%, rgba(28, 25, 23, 0.7) 100%);
+  /* ========== GRADIENTS ========== */
 
-  /* Typography */
-  --font-heading: 'Playfair Display', Georgia, serif;
-  --font-body: 'Outfit', system-ui, sans-serif;
+  --gradient-tea: linear-gradient(135deg, var(--tea-deep) 0%, var(--tea-garden) 100%);
+  --gradient-river: linear-gradient(135deg, var(--brahma-deep) 0%, var(--brahma-blue) 100%);
+  --gradient-muga: linear-gradient(135deg, var(--muga-gold) 0%, var(--tea-golden) 100%);
+  --gradient-sunset: linear-gradient(135deg, var(--warning) 0%, var(--mekhela-red) 100%);
+  --gradient-hero: linear-gradient(180deg, transparent 0%, rgba(13, 59, 76, 0.85) 100%);
 
-  /* Spacing */
+  /* ========== TYPOGRAPHY ========== */
+
+  --font-heading: 'Lora', Georgia, serif;
+  --font-body: 'Nunito', system-ui, sans-serif;
+
+  /* ========== SPACING ========== */
+
   --header-height: 72px;
   --sidebar-width: 320px;
+  --container-max: 1400px;
 }
 
-/* Dark Mode Variables */
+/* Dark Mode (Inspired by Assam nights) */
 .dark {
-  --bg-primary: #0F0E0D;
-  --bg-secondary: #1C1917;
-  --bg-card: #292524;
-  --bg-overlay: rgba(0, 0, 0, 0.7);
+  --bg-primary: #0A1F28;
+  --bg-secondary: #122E38;
+  --bg-card: #1A3D4A;
 
-  --text-primary: #FAFAF9;
-  --text-secondary: #A8A29E;
-  --text-muted: #78716C;
+  --text-primary: #F5F0E1;
+  --text-secondary: #B8D4DB;
+  --text-muted: #7A9BA5;
 
-  --border-light: #44403C;
-  --border-medium: #57534E;
+  --border-light: #2A4A55;
+  --border-medium: #3A5A65;
 
-  --glass-bg: rgba(28, 25, 23, 0.8);
-  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(18, 46, 56, 0.9);
 
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
 /* ============================================
@@ -117,7 +165,7 @@ body {
   font-family: var(--font-body);
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  line-height: 1.6;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -130,82 +178,57 @@ h5,
 h6 {
   font-family: var(--font-heading);
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 1.3;
   color: var(--text-primary);
 }
 
 /* ============================================
-   COMPONENT STYLES
+   COMPONENTS - ASSAM STYLE
    ============================================ */
 
-/* Glass Card */
-.glass-card {
-  background: var(--glass-bg);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  border: 1px solid var(--glass-border);
-  border-radius: 16px;
-}
-
-/* Heritage Card */
-.heritage-card {
-  background: var(--bg-card);
-  border-radius: 16px;
-  box-shadow: var(--shadow-md);
-  overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.heritage-card:hover {
-  box-shadow: var(--shadow-xl);
-  transform: translateY(-4px);
-}
-
-/* Primary Button */
+/* Primary Button - Tea Garden */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 12px 24px;
-  background: var(--gradient-heritage);
+  padding: 14px 28px;
+  background: var(--gradient-tea);
   color: white;
   font-weight: 600;
+  font-size: 15px;
   border-radius: 12px;
   border: none;
   cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 14px rgba(212, 165, 116, 0.4);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(27, 77, 46, 0.3);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(212, 165, 116, 0.5);
+  box-shadow: 0 6px 20px rgba(27, 77, 46, 0.4);
 }
 
-.btn-primary:active {
-  transform: translateY(0);
-}
-
-/* Secondary Button */
+/* Secondary Button - Muga Gold */
 .btn-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 12px 24px;
+  padding: 14px 28px;
   background: transparent;
   color: var(--text-primary);
   font-weight: 600;
+  font-size: 15px;
   border-radius: 12px;
-  border: 2px solid var(--border-medium);
+  border: 2px solid var(--muga-gold);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .btn-secondary:hover {
-  border-color: var(--heritage-gold);
-  color: var(--heritage-gold);
+  background: var(--muga-gold);
+  color: white;
 }
 
 /* Ghost Button */
@@ -218,7 +241,7 @@ h6 {
   background: transparent;
   color: var(--text-secondary);
   font-weight: 500;
-  border-radius: 12px;
+  border-radius: 10px;
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -229,128 +252,157 @@ h6 {
   color: var(--text-primary);
 }
 
-/* Badge */
+/* ========== CARDS ========== */
+
+/* Experience Card */
+.experience-card {
+  background: var(--bg-card);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid var(--border-light);
+}
+
+.experience-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Glass Card */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+}
+
+/* Heritage Card with Gamusa Border */
+.heritage-card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow-md);
+}
+
+.heritage-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: repeating-linear-gradient(90deg,
+      var(--gamusa-red) 0px,
+      var(--gamusa-red) 8px,
+      var(--gamusa-white) 8px,
+      var(--gamusa-white) 12px);
+}
+
+/* ========== BADGES ========== */
+
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  padding: 4px 12px;
+  gap: 6px;
+  padding: 6px 14px;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   border-radius: 100px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
 }
 
-.badge-heritage {
-  background: rgba(212, 165, 116, 0.15);
-  color: var(--heritage-bronze);
+.badge-tea {
+  background: rgba(27, 77, 46, 0.12);
+  color: var(--tea-deep);
 }
 
-.badge-nature {
-  background: rgba(46, 139, 139, 0.15);
-  color: var(--nature-teal);
+.badge-river {
+  background: rgba(30, 95, 116, 0.12);
+  color: var(--brahma-blue);
+}
+
+.badge-muga {
+  background: rgba(201, 162, 39, 0.15);
+  color: #8B6914;
+}
+
+.badge-tribal {
+  background: rgba(183, 28, 28, 0.1);
+  color: var(--mekhela-red);
 }
 
 .badge-verified {
-  background: rgba(34, 197, 94, 0.15);
+  background: rgba(46, 125, 50, 0.12);
   color: var(--success);
 }
 
-/* Input Styles */
+.badge-festival {
+  background: linear-gradient(135deg, rgba(201, 162, 39, 0.2) 0%, rgba(211, 47, 47, 0.15) 100%);
+  color: var(--mekhela-red);
+}
+
+/* ========== INPUTS ========== */
+
 .input-field {
   width: 100%;
-  padding: 14px 16px;
+  padding: 16px 20px;
   background: var(--bg-card);
   border: 2px solid var(--border-light);
-  border-radius: 12px;
+  border-radius: 14px;
   font-family: var(--font-body);
   font-size: 16px;
   color: var(--text-primary);
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .input-field:focus {
   outline: none;
-  border-color: var(--heritage-gold);
-  box-shadow: 0 0 0 4px rgba(212, 165, 116, 0.15);
+  border-color: var(--brahma-blue);
+  box-shadow: 0 0 0 4px rgba(30, 95, 116, 0.1);
 }
 
 .input-field::placeholder {
   color: var(--text-muted);
 }
 
-/* ============================================
-   MAP STYLES
-   ============================================ */
-
-.mapboxgl-popup-content {
-  padding: 0 !important;
-  border-radius: 16px !important;
-  overflow: hidden;
-  box-shadow: var(--shadow-xl) !important;
-}
-
-.mapboxgl-popup-close-button {
-  font-size: 20px;
-  padding: 8px;
-  color: var(--text-secondary);
-  right: 4px !important;
-  top: 4px !important;
-}
-
-.mapboxgl-popup-close-button:hover {
-  background: var(--bg-secondary);
-  border-radius: 50%;
-}
-
-.map-marker {
-  width: 40px;
-  height: 40px;
+/* Search Box - Large Hero */
+.search-hero {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 12px;
+  padding: 8px 8px 8px 24px;
   background: var(--bg-card);
-  border: 3px solid var(--heritage-gold);
-  border-radius: 50%;
+  border-radius: 60px;
   box-shadow: var(--shadow-lg);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 18px;
+  max-width: 600px;
+  width: 100%;
 }
 
-.map-marker:hover {
-  transform: scale(1.15);
-  box-shadow: var(--shadow-xl);
+.search-hero input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 17px;
+  outline: none;
+  color: var(--text-primary);
 }
 
-.map-marker.active {
-  background: var(--heritage-gold);
-  border-color: var(--heritage-bronze);
-}
-
-.map-cluster {
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--gradient-heritage);
+.search-hero button {
+  padding: 14px 28px;
+  background: var(--gradient-tea);
   color: white;
-  font-weight: 700;
-  font-size: 16px;
-  border-radius: 50%;
-  box-shadow: var(--shadow-lg);
+  font-weight: 600;
+  border: none;
+  border-radius: 50px;
   cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.map-cluster:hover {
-  transform: scale(1.1);
+  transition: all 0.3s ease;
 }
 
 /* ============================================
-   NAVIGATION STYLES
+   NAVIGATION
    ============================================ */
 
 .nav-header {
@@ -358,7 +410,7 @@ h6 {
   background: var(--glass-bg);
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
-  border-bottom: 1px solid var(--glass-border);
+  border-bottom: 1px solid var(--border-light);
   position: fixed;
   top: 0;
   left: 0;
@@ -370,10 +422,11 @@ h6 {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 16px;
+  padding: 10px 18px;
   color: var(--text-secondary);
   font-weight: 500;
-  border-radius: 8px;
+  font-size: 15px;
+  border-radius: 10px;
   transition: all 0.2s ease;
 }
 
@@ -383,8 +436,134 @@ h6 {
 }
 
 .nav-link.active {
-  color: var(--heritage-gold);
-  background: rgba(212, 165, 116, 0.1);
+  color: var(--tea-deep);
+  background: rgba(27, 77, 46, 0.08);
+}
+
+/* ============================================
+   MAP STYLES
+   ============================================ */
+
+.mapboxgl-popup-content {
+  padding: 0 !important;
+  border-radius: 16px !important;
+  overflow: hidden;
+  box-shadow: var(--shadow-xl) !important;
+  border: 1px solid var(--border-light);
+}
+
+.mapboxgl-popup-close-button {
+  font-size: 20px;
+  padding: 8px 12px;
+  color: var(--text-secondary);
+}
+
+.map-marker {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-card);
+  border: 3px solid var(--tea-garden);
+  border-radius: 50%;
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 20px;
+}
+
+.map-marker:hover {
+  transform: scale(1.15);
+  border-color: var(--muga-gold);
+}
+
+.map-marker.wildlife {
+  border-color: var(--forest-kaziranga);
+}
+
+.map-marker.river {
+  border-color: var(--brahma-blue);
+}
+
+.map-marker.heritage {
+  border-color: var(--muga-gold);
+}
+
+.map-marker.tribal {
+  border-color: var(--mekhela-red);
+}
+
+/* ============================================
+   PATTERNS & DECORATIONS
+   ============================================ */
+
+/* Gamusa Pattern Border */
+.gamusa-border {
+  position: relative;
+}
+
+.gamusa-border::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: repeating-linear-gradient(90deg,
+      var(--gamusa-red) 0px,
+      var(--gamusa-red) 10px,
+      transparent 10px,
+      transparent 14px);
+}
+
+/* Tea Leaf Pattern Background */
+.tea-pattern-bg {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5c-8 0-15 12-15 25s7 25 15 25 15-12 15-25S38 5 30 5z' fill='%231B4D2E' fill-opacity='0.03'/%3E%3C/svg%3E");
+}
+
+/* River Wave Pattern */
+.river-wave-bg {
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 Q25 0 50 10 T100 10' stroke='%231E5F74' stroke-width='1' fill='none' opacity='0.1'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+}
+
+/* ============================================
+   FESTIVAL CALENDAR
+   ============================================ */
+
+.festival-card {
+  background: linear-gradient(135deg, var(--bg-card) 0%, var(--eri-cream) 100%);
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid var(--border-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.festival-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  background: var(--gradient-muga);
+}
+
+.festival-month {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background: var(--gradient-tea);
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  border-radius: 12px;
+  text-align: center;
+  line-height: 1.2;
 }
 
 /* ============================================
@@ -404,7 +583,7 @@ h6 {
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(24px);
   }
 
   to {
@@ -416,7 +595,7 @@ h6 {
 @keyframes slideDown {
   from {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-24px);
   }
 
   to {
@@ -428,7 +607,7 @@ h6 {
 @keyframes scaleIn {
   from {
     opacity: 0;
-    transform: scale(0.95);
+    transform: scale(0.9);
   }
 
   to {
@@ -437,35 +616,48 @@ h6 {
   }
 }
 
-@keyframes pulse-ring {
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
   0% {
-    transform: scale(0.8);
-    opacity: 1;
+    background-position: -200% 0;
   }
 
   100% {
-    transform: scale(2);
-    opacity: 0;
+    background-position: 200% 0;
   }
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.3s ease-out;
+  animation: fadeIn 0.4s ease-out;
 }
 
 .animate-slide-up {
-  animation: slideUp 0.4s ease-out;
+  animation: slideUp 0.5s ease-out;
 }
 
 .animate-slide-down {
-  animation: slideDown 0.4s ease-out;
+  animation: slideDown 0.5s ease-out;
 }
 
 .animate-scale-in {
-  animation: scaleIn 0.3s ease-out;
+  animation: scaleIn 0.4s ease-out;
 }
 
-/* Staggered animation delays */
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
 .stagger-1 {
   animation-delay: 0.05s;
 }
@@ -486,13 +678,23 @@ h6 {
   animation-delay: 0.25s;
 }
 
+/* Loading shimmer */
+.shimmer {
+  background: linear-gradient(90deg,
+      var(--bg-secondary) 0%,
+      var(--bg-card) 50%,
+      var(--bg-secondary) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
 /* ============================================
    SCROLLBAR
    ============================================ */
 
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -500,39 +702,54 @@ h6 {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--border-medium);
-  border-radius: 4px;
+  background: var(--brahma-light);
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--text-muted);
+  background: var(--brahma-blue);
 }
 
 /* ============================================
    UTILITIES
    ============================================ */
 
-.text-gradient-heritage {
-  background: var(--gradient-heritage);
+.text-gradient-tea {
+  background: var(--gradient-tea);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.bg-gradient-heritage {
-  background: var(--gradient-heritage);
+.text-gradient-muga {
+  background: var(--gradient-muga);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.bg-gradient-nature {
-  background: var(--gradient-nature);
+.bg-gradient-tea {
+  background: var(--gradient-tea);
+}
+
+.bg-gradient-river {
+  background: var(--gradient-river);
+}
+
+.bg-gradient-muga {
+  background: var(--gradient-muga);
 }
 
 .section-padding {
-  padding: 80px 0;
+  padding: 100px 0;
+}
+
+.section-padding-sm {
+  padding: 60px 0;
 }
 
 .container-custom {
-  max-width: 1400px;
+  max-width: var(--container-max);
   margin: 0 auto;
   padding: 0 24px;
 }
@@ -548,7 +765,7 @@ h6 {
 }
 
 /* ============================================
-   RESPONSIVE UTILITIES
+   RESPONSIVE
    ============================================ */
 
 @media (max-width: 768px) {
@@ -557,10 +774,43 @@ h6 {
   }
 
   .section-padding {
-    padding: 48px 0;
+    padding: 60px 0;
+  }
+
+  .section-padding-sm {
+    padding: 40px 0;
   }
 
   .container-custom {
     padding: 0 16px;
   }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus styles */
+*:focus-visible {
+  outline: 3px solid var(--brahma-blue);
+  outline-offset: 2px;
 }

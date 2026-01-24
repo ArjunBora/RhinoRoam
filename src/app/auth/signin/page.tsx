@@ -4,6 +4,7 @@ import { useState, Suspense } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import {
     Compass,
     Mail,
@@ -74,7 +75,7 @@ function SignInForm() {
                     router.refresh();
                 }
             }
-        } catch (err) {
+        } catch {
             setFormError("Something went wrong. Please try again.");
         } finally {
             setIsLoading(false);
@@ -277,7 +278,7 @@ export default function SignInPage() {
     return (
         <div className="min-h-screen flex">
             {/* Left Side - Form */}
-            <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
+            <div className="w-full lg:w-1/2 flex items-center justify-center p-8 relative z-10">
                 <Suspense fallback={<LoadingFallback />}>
                     <SignInForm />
                 </Suspense>
@@ -285,10 +286,11 @@ export default function SignInPage() {
 
             {/* Right Side - Image */}
             <div className="hidden lg:block lg:w-1/2 relative">
-                <img
+                <Image
                     src="https://images.unsplash.com/photo-1590059390047-f5e67e4d2c6c?w=1600&q=80"
                     alt="Heritage"
-                    className="absolute inset-0 w-full h-full object-cover"
+                    fill
+                    className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" />
                 <div className="absolute bottom-12 left-12 right-12 text-white">

@@ -1,26 +1,44 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { AuthProvider } from "@/components/providers/AuthProvider";
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#1B4D2E',
+};
+
 export const metadata: Metadata = {
-  title: "GUenARK - Discover India's Heritage",
-  description: "A map-centric tourism and heritage intelligence platform helping travellers discover, plan, navigate, and respect India's cultural destinations while supporting local communities.",
-  keywords: ["tourism", "heritage", "India", "travel", "culture", "sustainable tourism", "community tourism"],
-  authors: [{ name: "GUenARK Team" }],
+  title: "RhinoRoam - Roam Assam with the Locals",
+  description: "Discover Assam through local eyes. Connect with community hosts, explore Kaziranga's wildlife, Majuli's heritage, and the hidden gems of Northeast India.",
+  keywords: [
+    "Assam tourism", "Northeast India travel", "Kaziranga safari", "Majuli island",
+    "Brahmaputra cruise", "Muga silk", "Bihu festival", "tea garden stay",
+    "tribal tourism", "community tourism", "sustainable travel", "heritage tourism",
+    "Guwahati", "Sivasagar", "Bodo culture", "Mising tribe", "one-horned rhino"
+  ],
+  authors: [{ name: "RhinoRoam Team" }],
   openGraph: {
-    title: "GUenARK - Discover India's Heritage",
-    description: "Explore India's rich cultural heritage with our intelligent tourism platform",
+    title: "RhinoRoam - Roam Assam with the Locals",
+    description: "Connect with Assam's communities, explore hidden trails, and experience the soul of Northeast India",
     type: "website",
     locale: "en_IN",
+    siteName: "RhinoRoam",
   },
   twitter: {
     card: "summary_large_image",
-    title: "GUenARK - Discover India's Heritage",
-    description: "Explore India's rich cultural heritage with our intelligent tourism platform",
+    title: "RhinoRoam - Roam Assam with the Locals",
+    description: "Connect with Assam's communities, explore hidden trails, and experience Northeast India",
+    creator: "@rhinoroam",
   },
-  viewport: "width=device-width, initial-scale=1",
-  themeColor: "#D4A574",
+  other: {
+    "google-site-verification": "your-verification-code",
+  },
 };
+
+import { ChatWidget } from "@/components/chat/ChatWidget";
+
+// ... existing imports ...
 
 export default function RootLayout({
   children,
@@ -32,6 +50,7 @@ export default function RootLayout({
       <body className="antialiased">
         <AuthProvider>
           {children}
+          <ChatWidget />
         </AuthProvider>
       </body>
     </html>

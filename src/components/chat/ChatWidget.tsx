@@ -236,23 +236,31 @@ export function ChatWidget() {
     );
 }
 
-// Simulated responses for MVP demo
+// Simulated responses for MVP demo - Assam focused
 function getSimulatedResponse(query: string): string {
     const lowerQuery = query.toLowerCase();
 
-    if (lowerQuery.includes("plan") || lowerQuery.includes("day")) {
-        return `Here's a suggested day plan for Hampi:\n\n🌅 **Morning (6-9 AM)**\nStart at Virupaksha Temple for sunrise\n\n🏛️ **Mid-Morning (9-12 PM)**\nExplore Hampi Bazaar & Hemakuta Hill\n\n🍽️ **Lunch (12-1 PM)**\nTry local cuisine at Mango Tree Restaurant\n\n🏰 **Afternoon (2-5 PM)**\nVisit Vittala Temple & Stone Chariot\n\n🌄 **Evening (5-7 PM)**\nSunset at Matanga Hill\n\n💡 **Tip:** Carry water, wear comfortable shoes, and dress modestly for temples.`;
+    if (lowerQuery.includes("plan") || lowerQuery.includes("day") || lowerQuery.includes("itinerary")) {
+        return `Here's a suggested 3-day Assam itinerary:\n\n🦏 **Day 1: Kaziranga**\n• 6 AM - Elephant safari (Central Range)\n• 9 AM - Jeep safari (Western Range)\n• Afternoon - Orchid park & tea gardens\n• Stay at Wild Grass Eco Lodge\n\n🏝️ **Day 2: Majuli Island**\n• Ferry from Nimati Ghat (7 AM)\n• Visit Kamalabari & Auniati Satras\n• Mask-making workshop\n• Stay at Satra guesthouse\n\n🏛️ **Day 3: Sivasagar Heritage**\n• Rang Ghar (Asia's oldest amphitheatre)\n• Talatal Ghar underground palace\n• Sivasagar Tank & temples\n\n💡 **Tip:** Book safari permits in advance during peak season (Nov-Feb)!`;
     }
 
-    if (lowerQuery.includes("stay") || lowerQuery.includes("hotel")) {
-        return `Here are my top recommendations for stays in Hampi:\n\n🏡 **Budget-Friendly**\n• Goan Corner - ₹800/night\n• Rocky Guest House - ₹1,000/night\n\n🌴 **Mid-Range**\n• Clarks Inn Hampi - ₹2,500/night\n• Kishkinda Heritage Resort - ₹3,500/night\n\n✨ **Premium**\n• Evolve Back - ₹15,000/night\n\nI recommend staying on the Hippie Island side for a peaceful experience!`;
+    if (lowerQuery.includes("stay") || lowerQuery.includes("hotel") || lowerQuery.includes("where")) {
+        return `Here are my top recommendations for stays in Assam:\n\n🦏 **Kaziranga**\n• Wild Grass Eco Lodge - ₹8,000/night\n• Diphlu River Lodge - ₹12,000/night\n\n🏝️ **Majuli**\n• Satra Guesthouse - ₹1,000/night\n• Mising Tribal Homestay - ₹1,500/night\n\n🍵 **Dibrugarh (Tea)**\n• Mancotta Heritage Bungalow - ₹15,000/night\n\n🏛️ **Guwahati**\n• Brahmaputra River Lodge - ₹6,000/night\n\nI recommend eco-lodges for wildlife and homestays for cultural immersion!`;
+    }
+
+    if (lowerQuery.includes("reach") || lowerQuery.includes("how to go") || lowerQuery.includes("transport")) {
+        return `How to reach Assam:\n\n✈️ **By Air**\n• Guwahati (GAU) - Main gateway\n• Jorhat (JRH) - For Kaziranga/Majuli\n• Dibrugarh (DIB) - For tea region\n\n🚂 **By Train**\n• Rajdhani Express from Delhi (24h)\n• Saraighat Express from Kolkata (17h)\n\n🚗 **By Road**\n• Guwahati to Kaziranga: 217 km (4-5h)\n• Guwahati to Majuli: 347 km (7-8h)\n\n💡 **Tip:** For Majuli, you'll need a ferry from Nimati Ghat!`;
+    }
+
+    if (lowerQuery.includes("weather") || lowerQuery.includes("best time") || lowerQuery.includes("when")) {
+        return `Best time to visit Assam:\n\n⭐ **Peak Season (Nov-Feb)**\n• Weather: 10-25°C, clear skies\n• Wildlife parks: Open\n• Great for safaris\n\n🎉 **Festival Season (Apr)**\n• Rongali Bihu celebrations\n• Cultural performances\n• Vibrant atmosphere\n\n🌧️ **Monsoon (Jun-Sep)**\n• Heavy rainfall\n• Parks closed\n• Budget prices\n\n💡 **Best months:** November-February for wildlife, April for Bihu!`;
     }
 
     if (lowerQuery.includes("nearby") || lowerQuery.includes("visit") || lowerQuery.includes("places")) {
-        return `Must-visit places in Hampi:\n\n🛕 **Virupaksha Temple** - Living temple, 7th century\n🏛️ **Vittala Temple** - Famous Stone Chariot\n🏰 **Royal Enclosure** - Ancient palace ruins\n🌄 **Matanga Hill** - Best sunset point\n💎 **Lotus Mahal** - Indo-Islamic architecture\n🐘 **Elephant Stables** - Royal elephant housing\n\nWould you like detailed information about any of these?`;
+        return `Must-visit places in Assam:\n\n🦏 **Kaziranga National Park** - One-horned rhinos\n🏝️ **Majuli Island** - World's largest river island\n🛕 **Kamakhya Temple** - Sacred Shakti Peetha\n🏛️ **Sivasagar** - Ahom heritage sites\n🍵 **Jorhat/Dibrugarh** - Tea gardens\n🐆 **Manas National Park** - UNESCO site\n🌿 **Haflong** - Assam's only hill station\n\nWould you like detailed information about any of these?`;
     }
 
-    return `That's a great question! I can help you with:\n\n• Planning your itinerary\n• Finding heritage sites to visit\n• Recommending local stays\n• Cultural tips and etiquette\n• Transportation options\n\nWhat would you like to know more about?`;
+    return `Namaste! 🙏 I can help you explore Assam:\n\n• Planning your itinerary\n• Wildlife safari bookings\n• Finding homestays & eco-lodges\n• Cultural experiences & festivals\n• Transportation options\n• Best time to visit\n\nWhat would you like to know about Assam?`;
 }
 
 function getSimulatedActions(query: string): QuickAction[] {

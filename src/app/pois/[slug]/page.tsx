@@ -1,411 +1,702 @@
-"use client";
+'use client';
 
-import { Header, Footer } from "@/components/ui/navigation";
-import { ChatWidget } from "@/components/chat/ChatWidget";
-import { InteractiveMap } from "@/components/map/InteractiveMap";
-import Link from "next/link";
+import { useState, use } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 import {
-    MapPin,
-    Clock,
-    Calendar,
-    DollarSign,
-    Info,
-    Shield,
-    Camera,
-    Volume2,
-    ChevronRight,
-    ChevronLeft,
-    Star,
-    Share2,
-    Heart,
-    Navigation,
-    AlertTriangle,
-    CheckCircle
-} from "lucide-react";
-import { cn, POI_CATEGORY_ICONS, POI_CATEGORY_LABELS, formatCurrency, formatDuration } from "@/lib/utils";
+    ChevronLeft, MapPin, Star, Clock, Calendar, Users,
+    Navigation, Share2, Heart, Camera, AlertTriangle, Info,
+    Check, X, Globe, Phone, IndianRupee, ThermometerSun,
+    Shirt, Shield, Leaf, ChevronRight, Play, ExternalLink
+} from 'lucide-react';
+
+/* ============================================
+   POI DETAIL PAGE
+   Heritage site with full information
+   ============================================ */
 
 // Sample POI data
-const POI = {
-    id: "1",
-    name: "Virupaksha Temple",
-    slug: "virupaksha-temple",
-    category: "TEMPLE",
-    destinationId: "hampi",
-    destinationName: "Hampi",
-    description: "The oldest and most sacred temple in Hampi, dedicated to Lord Shiva as Virupaksha. This living temple has been in continuous worship since the 7th century and is the main center of pilgrimage in Hampi. The temple complex includes a main shrine, smaller shrines, pillared halls, and a 160-foot tall gopuram (tower) visible from miles away.",
-    culturalSignificance: "The temple features a unique camera obscura effect where an inverted image of the main gopuram appears on the inner wall of the sanctum. This ancient optical phenomenon demonstrates the sophisticated understanding of light by the temple architects. The temple is also home to Lakshmi, the temple elephant who blesses devotees in exchange for a small offering.",
-    latitude: 15.335,
-    longitude: 76.46,
+const samplePOI = {
+    id: '1',
+    name: 'Kaziranga National Park',
+    nameLocal: 'কাজিৰঙা ৰাষ্ট্ৰীয় উদ্যান',
+    slug: 'kaziranga-national-park',
+    category: 'Wildlife Sanctuary',
+    subcategory: 'National Park',
+
+    description: `Kaziranga National Park, a UNESCO World Heritage Site, is home to two-thirds of the world's one-horned rhinoceros population. Spread across 430 sq km of tall elephant grass, marshlands, and dense tropical moist broadleaf forests, it is one of the last areas in eastern India undisturbed by human presence.
+
+The park is recognized as an Important Bird Area by BirdLife International for conservation of avifaunal species. It is also home to the highest density of tigers among protected areas in the world, and was declared a Tiger Reserve in 2006.`,
+
+    culturalSignificance: `Kaziranga has been a protected area since 1905, thanks to the efforts of Mary Victoria Leiter Curzon, wife of the Viceroy of India. The local Karbi and Mising tribes have coexisted with the wildlife for centuries, maintaining a delicate balance between human activity and conservation.
+
+The name 'Kaziranga' comes from the Karbi word 'Kajir-a-rang', meaning 'the land of red goats', referring to the color of the deer that inhabit the area.`,
+
     images: [
-        "https://images.unsplash.com/photo-1590059390047-f5e67e4d2c6c?w=1200&q=80",
-        "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=1200&q=80",
-        "https://images.unsplash.com/photo-1564294636501-be9877b18f68?w=1200&q=80",
-        "https://images.unsplash.com/photo-1506461883276-594a12b11cf3?w=1200&q=80",
+        'https://images.unsplash.com/photo-1551085254-e96b210db58a?w=1200&q=80',
+        'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1200&q=80',
+        'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80',
     ],
-    audioGuideUrl: "/audio/virupaksha-guide.mp3",
-    videoUrl: "https://www.youtube.com/watch?v=example",
+
+    district: 'Golaghat',
+    location: { lat: 26.5775, lng: 93.1711 },
+
+    // Timings
     timings: {
-        monday: { open: "06:00", close: "18:00" },
-        tuesday: { open: "06:00", close: "18:00" },
-        wednesday: { open: "06:00", close: "18:00" },
-        thursday: { open: "06:00", close: "18:00" },
-        friday: { open: "06:00", close: "18:00" },
-        saturday: { open: "06:00", close: "18:00" },
-        sunday: { open: "06:00", close: "18:00" },
+        opening: '7:00 AM',
+        closing: '4:00 PM',
+        closedOn: 'Mondays (Elephant Safari)',
+        seasonOpen: 'November 1',
+        seasonClose: 'April 30',
+        notes: 'Park closed during monsoon (May-October)',
     },
-    entryFee: { indian: 0, foreigner: 0, camera: 50 },
-    dressCodes: [
-        "Modest clothing required - cover shoulders and knees",
-        "Remove footwear before entering temple premises",
-        "No leather items inside the sanctum",
+
+    // Entry Fees
+    entryFees: {
+        indian: { adult: 100, child: 50, camera: 100, video: 500 },
+        foreigner: { adult: 650, child: 200, camera: 500, video: 1000 },
+        vehicle: { jeep: 3500, elephant: 1600 },
+    },
+
+    // Ratings
+    rating: 4.9,
+    reviewCount: 2340,
+
+    // What to See
+    highlights: [
+        { name: 'One-Horned Rhinoceros', description: 'Over 2,400 rhinos call Kaziranga home' },
+        { name: 'Bengal Tigers', description: 'Highest density of tigers in any protected area' },
+        { name: 'Asian Elephants', description: 'Large herds roam freely across the park' },
+        { name: 'Bird Watching', description: '480+ species including migratory birds' },
     ],
-    restrictions: [
-        "Photography not allowed inside main sanctum",
-        "Non-Hindus may not enter the inner sanctum",
-    ],
+
+    // Safety Tips
     safetyTips: [
-        "Temple elephant Lakshmi may be present - maintain safe distance",
-        "Floors can be hot in afternoon - carry socks if needed",
-        "Watch for monkeys - don't carry visible food items",
-        "Steep stairs to upper levels - use handrails",
+        { type: 'warning', text: 'Maintain minimum 20m distance from all wildlife' },
+        { type: 'warning', text: 'Do not get out of the safari vehicle under any circumstances' },
+        { type: 'warning', text: 'Do not use flash photography - it startles animals' },
+        { type: 'info', text: 'Follow your guide\'s instructions at all times' },
+        { type: 'info', text: 'Carry insect repellent for morning safaris' },
+        { type: 'health', text: 'Anti-malarial precautions recommended' },
     ],
+
+    // Cultural Norms
     culturalNorms: [
-        "Walk clockwise around the shrine (pradakshina)",
-        "Join hands in namaste when greeting priests",
-        "Maintain silence during prayer times",
-        "Don't point feet toward deity or holy objects",
-        "Accept prasad with right hand",
+        { rule: 'No loud noises or music', reason: 'Disturbs wildlife' },
+        { rule: 'No plastic bottles', reason: 'Environmental protection' },
+        { rule: 'Neutral colored clothing', reason: 'Bright colors may startle animals' },
+        { rule: 'No feeding animals', reason: 'Strict prohibition' },
     ],
+
+    // Dress Code
+    dressCode: {
+        recommended: ['Neutral/earthy colors', 'Long sleeves for sun protection', 'Comfortable shoes', 'Hat or cap'],
+        avoid: ['Bright colors', 'Perfume/cologne', 'Noisy jewelry'],
+        note: 'Mornings are cold (10-15°C) - bring warm layers',
+    },
+
+    // Health Advisories
     healthAdvisories: [
-        "Carry water - temple premises can be hot",
-        "Watch for uneven stone floors",
+        'Malaria precautions recommended',
+        'Carry any personal medications',
+        'Stay hydrated during safari',
+        'Medical facilities available at Kohora',
     ],
+
+    // Environmental Rules
     environmentalRules: [
-        "No littering - use designated bins",
-        "Don't feed the monkeys",
-        "Don't touch or climb on ancient structures",
+        'Zero tolerance for littering',
+        'Single-use plastic banned inside park',
+        'Stay on designated safari paths',
+        'No smoking inside the park',
     ],
-    averageVisitTime: 90,
-    isVerified: true,
-    rating: 4.8,
-    reviewCount: 1234,
+
+    // Best Time
+    bestTime: {
+        months: ['November', 'December', 'January', 'February', 'March'],
+        peakSeason: 'January-February',
+        weather: 'Cool and dry, 10-25°C',
+        note: 'Early morning safaris have best wildlife sightings',
+    },
+
+    // How to Reach
+    howToReach: {
+        nearestAirport: { name: 'Jorhat Airport', distance: '97 km', time: '2 hours' },
+        nearestRailway: { name: 'Furkating Junction', distance: '75 km', time: '1.5 hours' },
+        nearestTown: { name: 'Kohora', distance: '0 km', time: 'Inside' },
+        fromGuwahati: { distance: '217 km', time: '4-5 hours' },
+    },
+
+    // Nearby Stays
+    nearbyStays: [
+        { name: 'Wild Grass Eco Lodge', type: 'Eco Lodge', distance: '2 km', rating: 4.9 },
+        { name: 'Infinity Resort', type: 'Resort', distance: '3 km', rating: 4.7 },
+        { name: 'Diphlu River Lodge', type: 'Lodge', distance: '5 km', rating: 4.8 },
+    ],
+
+    // Nearby POIs
+    nearbyPOIs: [
+        { name: 'Orchid Park', distance: '5 km', type: 'Nature' },
+        { name: 'Tea Gardens', distance: '10 km', type: 'Heritage' },
+        { name: 'Karbi Village', distance: '15 km', type: 'Cultural' },
+    ],
+
+    // Contact
+    contact: {
+        phone: '+91 3776 268095',
+        email: 'kaziranga@wildlife.org',
+        website: 'https://kaziranga.assam.gov.in',
+    },
+
+    // Source
+    infoSource: 'Official (Assam Forest Department)',
+    lastUpdated: '2026-01-15',
 };
 
-const NEARBY_POIS = [
-    { id: "2", name: "Hampi Bazaar", category: "MARKET", distance: "0.2 km", image: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=400&q=80" },
-    { id: "3", name: "Hemakuta Hill", category: "VIEWPOINT", distance: "0.4 km", image: "https://images.unsplash.com/photo-1506461883276-594a12b11cf3?w=400&q=80" },
-    { id: "4", name: "Monolithic Bull", category: "MONUMENT", distance: "0.5 km", image: "https://images.unsplash.com/photo-1564294636501-be9877b18f68?w=400&q=80" },
-];
+export default function POIDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = use(params);
+    const [selectedImage, setSelectedImage] = useState(0);
+    const [isSaved, setIsSaved] = useState(false);
+    const [activeTab, setActiveTab] = useState<'overview' | 'safety' | 'practical'>('overview');
 
-export default function POIDetailPage({ params }: { params: { slug: string } }) {
-    const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'] as const;
-    const currentDay = days[new Date().getDay()] as keyof typeof POI.timings;
-    const todayTimings = POI.timings[currentDay];
-
+    // In production, fetch POI by slug
+    const poi = samplePOI;
 
     return (
-        <div className="min-h-screen flex flex-col">
-            <Header />
+        <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-primary)' }}>
+            {/* Hero */}
+            <div className="relative h-[50vh] md:h-[60vh]">
+                <Image
+                    src={poi.images[selectedImage]}
+                    alt={poi.name}
+                    fill
+                    className="object-cover"
+                    priority
+                />
+                <div
+                    className="absolute inset-0"
+                    style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.5) 100%)' }}
+                />
 
-            <main className="flex-1 pt-[var(--header-height)]">
-                {/* Hero Image Gallery */}
-                <section className="relative h-[50vh] md:h-[60vh] bg-[var(--neutral-900)]">
-                    <div className="absolute inset-0 flex">
-                        <div className="w-full md:w-2/3 relative">
-                            <img
-                                src={POI.images[0]}
-                                alt={POI.name}
-                                className="w-full h-full object-cover"
-                            />
-                        </div>
-                        <div className="hidden md:grid w-1/3 grid-rows-2 gap-1">
-                            <img
-                                src={POI.images[1]}
-                                alt={POI.name}
-                                className="w-full h-full object-cover"
-                            />
-                            <img
-                                src={POI.images[2]}
-                                alt={POI.name}
-                                className="w-full h-full object-cover"
-                            />
-                        </div>
-                    </div>
+                {/* Back Button */}
+                <Link
+                    href="/map"
+                    className="absolute top-6 left-6 flex items-center gap-2 px-4 py-2 rounded-full text-white text-sm font-medium transition-colors z-20"
+                    style={{ background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(8px)' }}
+                >
+                    <ChevronLeft className="w-4 h-4" />
+                    Back to Map
+                </Link>
 
-                    {/* Overlay Gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-
-                    {/* Actions */}
-                    <div className="absolute top-4 right-4 flex gap-2">
-                        <button className="p-3 bg-white/10 backdrop-blur-sm rounded-xl text-white hover:bg-white/20 transition-colors">
-                            <Share2 className="w-5 h-5" />
-                        </button>
-                        <button className="p-3 bg-white/10 backdrop-blur-sm rounded-xl text-white hover:bg-white/20 transition-colors">
-                            <Heart className="w-5 h-5" />
-                        </button>
-                    </div>
-
-                    {/* Gallery Count */}
-                    <button className="absolute bottom-4 right-4 px-4 py-2 bg-black/50 backdrop-blur-sm rounded-xl text-white text-sm flex items-center gap-2 hover:bg-black/70 transition-colors">
-                        <Camera className="w-4 h-4" />
-                        View all {POI.images.length} photos
+                {/* Actions */}
+                <div className="absolute top-6 right-6 flex gap-2 z-20">
+                    <button
+                        onClick={() => setIsSaved(!isSaved)}
+                        className="w-10 h-10 rounded-full flex items-center justify-center transition-colors"
+                        style={{ background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(8px)' }}
+                    >
+                        <Heart
+                            className="w-5 h-5 text-white"
+                            style={{ fill: isSaved ? 'var(--mekhela-red)' : 'none', color: isSaved ? 'var(--mekhela-red)' : 'white' }}
+                        />
                     </button>
-                </section>
+                    <button
+                        className="w-10 h-10 rounded-full flex items-center justify-center transition-colors"
+                        style={{ background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(8px)' }}
+                    >
+                        <Share2 className="w-5 h-5 text-white" />
+                    </button>
+                </div>
 
-                {/* Content */}
-                <section className="section-padding bg-[var(--bg-primary)]">
+                {/* Title */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
                     <div className="container-custom">
-                        <div className="grid lg:grid-cols-3 gap-8">
-                            {/* Main Content */}
-                            <div className="lg:col-span-2 space-y-8">
-                                {/* Breadcrumb */}
-                                <nav className="flex items-center gap-2 text-sm text-[var(--text-muted)]">
-                                    <Link href="/destinations" className="hover:text-[var(--text-primary)]">Destinations</Link>
-                                    <ChevronRight className="w-4 h-4" />
-                                    <Link href={`/destinations/${POI.destinationId}`} className="hover:text-[var(--text-primary)]">{POI.destinationName}</Link>
-                                    <ChevronRight className="w-4 h-4" />
-                                    <span className="text-[var(--text-primary)]">{POI.name}</span>
-                                </nav>
+                        <span className="badge badge-muga mb-3">{poi.category}</span>
+                        <h1
+                            className="text-3xl md:text-4xl font-bold text-white mb-2"
+                            style={{ fontFamily: 'var(--font-heading)' }}
+                        >
+                            {poi.name}
+                        </h1>
+                        <p className="text-white/70 text-lg mb-2">{poi.nameLocal}</p>
+                        <div className="flex flex-wrap items-center gap-4 text-white/80">
+                            <span className="flex items-center gap-1">
+                                <MapPin className="w-4 h-4" />
+                                {poi.district}, Assam
+                            </span>
+                            <span className="flex items-center gap-1">
+                                <Star className="w-4 h-4" style={{ color: 'var(--muga-gold)', fill: 'var(--muga-gold)' }} />
+                                {poi.rating} ({poi.reviewCount.toLocaleString()} reviews)
+                            </span>
+                        </div>
+                    </div>
+                </div>
 
-                                {/* Title Section */}
-                                <div>
-                                    <div className="flex items-center gap-3 mb-3">
-                                        <span className="badge badge-heritage">
-                                            {POI_CATEGORY_ICONS[POI.category]} {POI_CATEGORY_LABELS[POI.category]}
-                                        </span>
-                                        {POI.isVerified && (
-                                            <span className="badge badge-verified">
-                                                <CheckCircle className="w-3 h-3" /> Verified
-                                            </span>
-                                        )}
-                                    </div>
-                                    <h1 className="text-4xl font-heading font-bold mb-3">{POI.name}</h1>
-                                    <div className="flex items-center gap-4 text-sm text-[var(--text-secondary)]">
-                                        <span className="flex items-center gap-1">
-                                            <Star className="w-4 h-4 text-[var(--heritage-gold)] fill-[var(--heritage-gold)]" />
-                                            <strong>{POI.rating}</strong> ({POI.reviewCount} reviews)
-                                        </span>
-                                        <span className="flex items-center gap-1">
-                                            <MapPin className="w-4 h-4" /> {POI.destinationName}
-                                        </span>
-                                        <span className="flex items-center gap-1">
-                                            <Clock className="w-4 h-4" /> {formatDuration(POI.averageVisitTime)}
-                                        </span>
-                                    </div>
-                                </div>
+                {/* Image Thumbnails */}
+                <div className="absolute bottom-6 right-6 flex gap-2 z-20">
+                    {poi.images.map((img, idx) => (
+                        <button
+                            key={idx}
+                            onClick={() => setSelectedImage(idx)}
+                            className={`w-12 h-12 rounded-lg overflow-hidden border-2 transition-all ${selectedImage === idx ? 'opacity-100' : 'opacity-60'
+                                }`}
+                            style={{ borderColor: selectedImage === idx ? 'white' : 'transparent' }}
+                        >
+                            <Image
+                                src={img}
+                                alt={`View ${idx + 1}`}
+                                width={48}
+                                height={48}
+                                className="object-cover w-full h-full"
+                            />
+                        </button>
+                    ))}
+                </div>
+            </div>
 
+            {/* Tabs */}
+            <div
+                className="sticky top-0 z-40"
+                style={{ background: 'var(--glass-bg)', backdropFilter: 'blur(16px)', borderBottom: '1px solid var(--border-light)' }}
+            >
+                <div className="container-custom">
+                    <div className="flex gap-1 py-2">
+                        {[
+                            { id: 'overview', label: 'Overview' },
+                            { id: 'safety', label: 'Safety & Rules' },
+                            { id: 'practical', label: 'Practical Info' },
+                        ].map((tab) => (
+                            <button
+                                key={tab.id}
+                                onClick={() => setActiveTab(tab.id as typeof activeTab)}
+                                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === tab.id ? 'text-white' : ''
+                                    }`}
+                                style={{
+                                    background: activeTab === tab.id ? 'var(--gradient-tea)' : 'transparent',
+                                }}
+                            >
+                                {tab.label}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            {/* Content */}
+            <div className="container-custom py-8">
+                <div className="grid lg:grid-cols-3 gap-8">
+                    {/* Main Content */}
+                    <div className="lg:col-span-2">
+                        {activeTab === 'overview' && (
+                            <div className="space-y-6 animate-fade-in">
                                 {/* Description */}
-                                <div>
-                                    <h2 className="text-xl font-semibold mb-4">About</h2>
-                                    <p className="text-[var(--text-secondary)] leading-relaxed">{POI.description}</p>
-                                </div>
-
-                                {/* Cultural Significance */}
-                                {POI.culturalSignificance && (
-                                    <div className="p-6 bg-[var(--heritage-gold)]/10 rounded-2xl border border-[var(--heritage-gold)]/20">
-                                        <div className="flex items-start gap-4">
-                                            <div className="w-10 h-10 rounded-xl bg-gradient-heritage flex items-center justify-center flex-shrink-0">
-                                                <Info className="w-5 h-5 text-white" />
-                                            </div>
-                                            <div>
-                                                <h3 className="font-semibold mb-2">Cultural Significance</h3>
-                                                <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-                                                    {POI.culturalSignificance}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                )}
-
-                                {/* Audio Guide */}
-                                {POI.audioGuideUrl && (
-                                    <div className="p-4 bg-[var(--bg-card)] rounded-xl border border-[var(--border-light)] flex items-center justify-between">
-                                        <div className="flex items-center gap-3">
-                                            <div className="w-12 h-12 rounded-xl bg-[var(--nature-teal)]/20 flex items-center justify-center">
-                                                <Volume2 className="w-6 h-6 text-[var(--nature-teal)]" />
-                                            </div>
-                                            <div>
-                                                <h4 className="font-medium">Audio Guide Available</h4>
-                                                <p className="text-sm text-[var(--text-muted)]">Listen to the history and stories</p>
-                                            </div>
-                                        </div>
-                                        <button className="btn-secondary py-2 px-4 text-sm">
-                                            Play Guide
-                                        </button>
-                                    </div>
-                                )}
-
-                                {/* Cultural Norms & Safety */}
-                                <div className="grid md:grid-cols-2 gap-6">
-                                    {/* Dress Code & Etiquette */}
-                                    <div className="p-6 bg-[var(--bg-card)] rounded-2xl shadow-[var(--shadow-sm)]">
-                                        <h3 className="font-semibold mb-4 flex items-center gap-2">
-                                            <Shield className="w-5 h-5 text-[var(--nature-teal)]" />
-                                            Dress Code & Etiquette
-                                        </h3>
-                                        <ul className="space-y-3">
-                                            {POI.dressCodes.map((item, i) => (
-                                                <li key={i} className="flex items-start gap-2 text-sm text-[var(--text-secondary)]">
-                                                    <span className="w-5 h-5 rounded-full bg-[var(--nature-teal)]/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                                        <CheckCircle className="w-3 h-3 text-[var(--nature-teal)]" />
-                                                    </span>
-                                                    {item}
-                                                </li>
-                                            ))}
-                                            {POI.culturalNorms.slice(0, 3).map((item, i) => (
-                                                <li key={i + 10} className="flex items-start gap-2 text-sm text-[var(--text-secondary)]">
-                                                    <span className="w-5 h-5 rounded-full bg-[var(--heritage-gold)]/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                                        <Info className="w-3 h-3 text-[var(--heritage-gold)]" />
-                                                    </span>
-                                                    {item}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-
-                                    {/* Safety Tips */}
-                                    <div className="p-6 bg-[var(--bg-card)] rounded-2xl shadow-[var(--shadow-sm)]">
-                                        <h3 className="font-semibold mb-4 flex items-center gap-2">
-                                            <AlertTriangle className="w-5 h-5 text-[var(--warning)]" />
-                                            Safety Tips
-                                        </h3>
-                                        <ul className="space-y-3">
-                                            {POI.safetyTips.map((item, i) => (
-                                                <li key={i} className="flex items-start gap-2 text-sm text-[var(--text-secondary)]">
-                                                    <span className="w-5 h-5 rounded-full bg-[var(--warning)]/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                                        <AlertTriangle className="w-3 h-3 text-[var(--warning)]" />
-                                                    </span>
-                                                    {item}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                {/* Location Map */}
-                                <div>
-                                    <div className="flex items-center justify-between mb-4">
-                                        <h2 className="text-xl font-semibold">Location</h2>
-                                        <a
-                                            href={`https://www.google.com/maps/dir/?api=1&destination=${POI.latitude},${POI.longitude}`}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="btn-secondary py-2 px-4 text-sm"
-                                        >
-                                            <Navigation className="w-4 h-4" />
-                                            Get Directions
-                                        </a>
-                                    </div>
-                                    <InteractiveMap
-                                        className="h-64 rounded-2xl"
-                                        initialCenter={[POI.longitude, POI.latitude]}
-                                        initialZoom={15}
-                                        markers={[{ id: POI.id, name: POI.name, latitude: POI.latitude, longitude: POI.longitude, type: "poi", category: POI.category }]}
-                                    />
-                                </div>
-
-                                {/* Nearby Places */}
-                                <div>
-                                    <h2 className="text-xl font-semibold mb-4">Nearby Heritage Sites</h2>
-                                    <div className="grid grid-cols-3 gap-4">
-                                        {NEARBY_POIS.map((poi) => (
-                                            <Link
-                                                key={poi.id}
-                                                href={`/pois/${poi.id}`}
-                                                className="group bg-[var(--bg-card)] rounded-xl overflow-hidden shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] transition-all"
-                                            >
-                                                <div className="h-24 relative overflow-hidden">
-                                                    <img src={poi.image} alt={poi.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
-                                                </div>
-                                                <div className="p-3">
-                                                    <h4 className="text-sm font-medium truncate group-hover:text-[var(--heritage-gold)]">{poi.name}</h4>
-                                                    <p className="text-xs text-[var(--text-muted)]">{poi.distance}</p>
-                                                </div>
-                                            </Link>
+                                <section className="heritage-card p-6">
+                                    <h2 className="text-xl font-bold mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
+                                        About
+                                    </h2>
+                                    <div className="prose max-w-none" style={{ color: 'var(--text-secondary)' }}>
+                                        {poi.description.split('\n\n').map((para, idx) => (
+                                            <p key={idx} className="mb-4">{para}</p>
                                         ))}
                                     </div>
-                                </div>
+                                </section>
+
+                                {/* Cultural Significance */}
+                                <section className="heritage-card p-6">
+                                    <h2 className="text-xl font-bold mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
+                                        Cultural Significance
+                                    </h2>
+                                    <div className="prose max-w-none" style={{ color: 'var(--text-secondary)' }}>
+                                        {poi.culturalSignificance.split('\n\n').map((para, idx) => (
+                                            <p key={idx} className="mb-4">{para}</p>
+                                        ))}
+                                    </div>
+                                </section>
+
+                                {/* Highlights */}
+                                <section className="heritage-card p-6">
+                                    <h2 className="text-xl font-bold mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
+                                        What to See
+                                    </h2>
+                                    <div className="grid md:grid-cols-2 gap-4">
+                                        {poi.highlights.map((highlight, idx) => (
+                                            <div
+                                                key={idx}
+                                                className="p-4 rounded-xl"
+                                                style={{ background: 'var(--bg-secondary)' }}
+                                            >
+                                                <h3 className="font-semibold">{highlight.name}</h3>
+                                                <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
+                                                    {highlight.description}
+                                                </p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </section>
+
+                                {/* Best Time */}
+                                <section className="heritage-card p-6">
+                                    <h2 className="text-xl font-bold mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
+                                        Best Time to Visit
+                                    </h2>
+                                    <div className="grid md:grid-cols-3 gap-4">
+                                        <div className="p-4 rounded-xl" style={{ background: 'var(--bg-secondary)' }}>
+                                            <Calendar className="w-5 h-5 mb-2" style={{ color: 'var(--tea-garden)' }} />
+                                            <p className="font-semibold">{poi.bestTime.months.join(', ')}</p>
+                                            <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Best months</p>
+                                        </div>
+                                        <div className="p-4 rounded-xl" style={{ background: 'var(--bg-secondary)' }}>
+                                            <ThermometerSun className="w-5 h-5 mb-2" style={{ color: 'var(--tea-garden)' }} />
+                                            <p className="font-semibold">{poi.bestTime.weather}</p>
+                                            <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Weather</p>
+                                        </div>
+                                        <div className="p-4 rounded-xl" style={{ background: 'var(--bg-secondary)' }}>
+                                            <Clock className="w-5 h-5 mb-2" style={{ color: 'var(--tea-garden)' }} />
+                                            <p className="font-semibold">Early Morning</p>
+                                            <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Best for sightings</p>
+                                        </div>
+                                    </div>
+                                </section>
                             </div>
+                        )}
 
-                            {/* Sidebar */}
-                            <div className="space-y-6">
-                                {/* Quick Info Card */}
-                                <div className="bg-[var(--bg-card)] rounded-2xl shadow-[var(--shadow-md)] overflow-hidden sticky top-[calc(var(--header-height)+24px)]">
-                                    <div className="p-6 border-b border-[var(--border-light)]">
-                                        <h3 className="font-semibold mb-4">Visitor Information</h3>
-
-                                        {/* Timings */}
-                                        <div className="mb-4">
-                                            <div className="flex items-center justify-between mb-2">
-                                                <span className="text-sm text-[var(--text-muted)]">Today's Hours</span>
-                                                <span className="text-sm font-medium text-[var(--success)]">Open Now</span>
-                                            </div>
-                                            <div className="flex items-center gap-2">
-                                                <Clock className="w-5 h-5 text-[var(--heritage-gold)]" />
-                                                <span className="font-medium">{todayTimings.open} - {todayTimings.close}</span>
-                                            </div>
-                                        </div>
-
-                                        {/* Entry Fee */}
-                                        <div className="mb-4">
-                                            <span className="text-sm text-[var(--text-muted)] block mb-2">Entry Fee</span>
-                                            <div className="space-y-1">
-                                                <div className="flex justify-between text-sm">
-                                                    <span>Indian Citizens</span>
-                                                    <span className="font-medium">
-                                                        {POI.entryFee.indian === 0 ? "Free" : formatCurrency(POI.entryFee.indian)}
-                                                    </span>
-                                                </div>
-                                                <div className="flex justify-between text-sm">
-                                                    <span>Foreign Nationals</span>
-                                                    <span className="font-medium">
-                                                        {POI.entryFee.foreigner === 0 ? "Free" : formatCurrency(POI.entryFee.foreigner)}
-                                                    </span>
-                                                </div>
-                                                {POI.entryFee.camera && (
-                                                    <div className="flex justify-between text-sm">
-                                                        <span>Camera Fee</span>
-                                                        <span className="font-medium">{formatCurrency(POI.entryFee.camera)}</span>
-                                                    </div>
+                        {activeTab === 'safety' && (
+                            <div className="space-y-6 animate-fade-in">
+                                {/* Safety Tips */}
+                                <section className="heritage-card p-6">
+                                    <h2 className="text-xl font-bold mb-4 flex items-center gap-2" style={{ fontFamily: 'var(--font-heading)' }}>
+                                        <Shield className="w-5 h-5" style={{ color: 'var(--tea-garden)' }} />
+                                        Safety Tips
+                                    </h2>
+                                    <div className="space-y-3">
+                                        {poi.safetyTips.map((tip, idx) => (
+                                            <div
+                                                key={idx}
+                                                className={`flex items-start gap-3 p-3 rounded-xl ${tip.type === 'warning' ? 'bg-yellow-50 dark:bg-yellow-900/10' :
+                                                        tip.type === 'health' ? 'bg-red-50 dark:bg-red-900/10' :
+                                                            'bg-blue-50 dark:bg-blue-900/10'
+                                                    }`}
+                                            >
+                                                {tip.type === 'warning' && (
+                                                    <AlertTriangle className="w-5 h-5 flex-shrink-0" style={{ color: 'var(--warning)' }} />
                                                 )}
+                                                {tip.type === 'info' && (
+                                                    <Info className="w-5 h-5 flex-shrink-0" style={{ color: 'var(--info)' }} />
+                                                )}
+                                                {tip.type === 'health' && (
+                                                    <AlertTriangle className="w-5 h-5 flex-shrink-0" style={{ color: 'var(--error)' }} />
+                                                )}
+                                                <span className="text-sm">{tip.text}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </section>
+
+                                {/* Cultural Norms */}
+                                <section className="heritage-card p-6">
+                                    <h2 className="text-xl font-bold mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
+                                        Rules & Etiquette
+                                    </h2>
+                                    <div className="space-y-3">
+                                        {poi.culturalNorms.map((norm, idx) => (
+                                            <div
+                                                key={idx}
+                                                className="flex items-start gap-3 p-3 rounded-xl"
+                                                style={{ background: 'var(--bg-secondary)' }}
+                                            >
+                                                <X className="w-5 h-5 flex-shrink-0" style={{ color: 'var(--error)' }} />
+                                                <div>
+                                                    <p className="font-medium">{norm.rule}</p>
+                                                    <p className="text-sm" style={{ color: 'var(--text-muted)' }}>{norm.reason}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </section>
+
+                                {/* Dress Code */}
+                                <section className="heritage-card p-6">
+                                    <h2 className="text-xl font-bold mb-4 flex items-center gap-2" style={{ fontFamily: 'var(--font-heading)' }}>
+                                        <Shirt className="w-5 h-5" style={{ color: 'var(--tea-garden)' }} />
+                                        Dress Code
+                                    </h2>
+                                    <div className="grid md:grid-cols-2 gap-6">
+                                        <div>
+                                            <h3 className="font-semibold mb-2 flex items-center gap-2">
+                                                <Check className="w-4 h-4" style={{ color: 'var(--success)' }} />
+                                                Recommended
+                                            </h3>
+                                            <ul className="space-y-2">
+                                                {poi.dressCode.recommended.map((item, idx) => (
+                                                    <li key={idx} className="text-sm flex items-center gap-2">
+                                                        <span className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--success)' }} />
+                                                        {item}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h3 className="font-semibold mb-2 flex items-center gap-2">
+                                                <X className="w-4 h-4" style={{ color: 'var(--error)' }} />
+                                                Avoid
+                                            </h3>
+                                            <ul className="space-y-2">
+                                                {poi.dressCode.avoid.map((item, idx) => (
+                                                    <li key={idx} className="text-sm flex items-center gap-2">
+                                                        <span className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--error)' }} />
+                                                        {item}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <p className="text-sm mt-4 p-3 rounded-lg" style={{ background: 'var(--bg-secondary)', color: 'var(--text-muted)' }}>
+                                        💡 {poi.dressCode.note}
+                                    </p>
+                                </section>
+
+                                {/* Environmental Rules */}
+                                <section className="heritage-card p-6">
+                                    <h2 className="text-xl font-bold mb-4 flex items-center gap-2" style={{ fontFamily: 'var(--font-heading)' }}>
+                                        <Leaf className="w-5 h-5" style={{ color: 'var(--success)' }} />
+                                        Environmental Rules
+                                    </h2>
+                                    <ul className="space-y-3">
+                                        {poi.environmentalRules.map((rule, idx) => (
+                                            <li key={idx} className="flex items-center gap-3 text-sm">
+                                                <span className="w-2 h-2 rounded-full" style={{ background: 'var(--tea-garden)' }} />
+                                                {rule}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </section>
+                            </div>
+                        )}
+
+                        {activeTab === 'practical' && (
+                            <div className="space-y-6 animate-fade-in">
+                                {/* Timings */}
+                                <section className="heritage-card p-6">
+                                    <h2 className="text-xl font-bold mb-4 flex items-center gap-2" style={{ fontFamily: 'var(--font-heading)' }}>
+                                        <Clock className="w-5 h-5" style={{ color: 'var(--tea-garden)' }} />
+                                        Timings
+                                    </h2>
+                                    <div className="grid md:grid-cols-2 gap-4">
+                                        <div className="p-4 rounded-xl" style={{ background: 'var(--bg-secondary)' }}>
+                                            <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Opening Hours</p>
+                                            <p className="font-semibold">{poi.timings.opening} - {poi.timings.closing}</p>
+                                        </div>
+                                        <div className="p-4 rounded-xl" style={{ background: 'var(--bg-secondary)' }}>
+                                            <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Season</p>
+                                            <p className="font-semibold">{poi.timings.seasonOpen} - {poi.timings.seasonClose}</p>
+                                        </div>
+                                    </div>
+                                    <p className="text-sm mt-4" style={{ color: 'var(--warning)' }}>
+                                        ⚠️ {poi.timings.notes}
+                                    </p>
+                                </section>
+
+                                {/* Entry Fees */}
+                                <section className="heritage-card p-6">
+                                    <h2 className="text-xl font-bold mb-4 flex items-center gap-2" style={{ fontFamily: 'var(--font-heading)' }}>
+                                        <IndianRupee className="w-5 h-5" style={{ color: 'var(--tea-garden)' }} />
+                                        Entry Fees
+                                    </h2>
+                                    <div className="grid md:grid-cols-2 gap-6">
+                                        <div>
+                                            <h3 className="font-semibold mb-3">Indian Nationals</h3>
+                                            <div className="space-y-2 text-sm">
+                                                <div className="flex justify-between">
+                                                    <span>Adult</span>
+                                                    <span className="font-medium">₹{poi.entryFees.indian.adult}</span>
+                                                </div>
+                                                <div className="flex justify-between">
+                                                    <span>Child</span>
+                                                    <span className="font-medium">₹{poi.entryFees.indian.child}</span>
+                                                </div>
+                                                <div className="flex justify-between">
+                                                    <span>Still Camera</span>
+                                                    <span className="font-medium">₹{poi.entryFees.indian.camera}</span>
+                                                </div>
+                                                <div className="flex justify-between">
+                                                    <span>Video Camera</span>
+                                                    <span className="font-medium">₹{poi.entryFees.indian.video}</span>
+                                                </div>
                                             </div>
                                         </div>
-
-                                        {/* Duration */}
                                         <div>
-                                            <span className="text-sm text-[var(--text-muted)] block mb-2">Recommended Duration</span>
-                                            <div className="flex items-center gap-2">
-                                                <Calendar className="w-5 h-5 text-[var(--heritage-gold)]" />
-                                                <span className="font-medium">{formatDuration(POI.averageVisitTime)}</span>
+                                            <h3 className="font-semibold mb-3">Foreign Nationals</h3>
+                                            <div className="space-y-2 text-sm">
+                                                <div className="flex justify-between">
+                                                    <span>Adult</span>
+                                                    <span className="font-medium">₹{poi.entryFees.foreigner.adult}</span>
+                                                </div>
+                                                <div className="flex justify-between">
+                                                    <span>Child</span>
+                                                    <span className="font-medium">₹{poi.entryFees.foreigner.child}</span>
+                                                </div>
+                                                <div className="flex justify-between">
+                                                    <span>Still Camera</span>
+                                                    <span className="font-medium">₹{poi.entryFees.foreigner.camera}</span>
+                                                </div>
+                                                <div className="flex justify-between">
+                                                    <span>Video Camera</span>
+                                                    <span className="font-medium">₹{poi.entryFees.foreigner.video}</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <div
+                                        className="mt-4 pt-4 grid grid-cols-2 gap-4"
+                                        style={{ borderTop: '1px solid var(--border-light)' }}
+                                    >
+                                        <div className="text-center p-3 rounded-xl" style={{ background: 'var(--bg-secondary)' }}>
+                                            <p className="font-semibold">₹{poi.entryFees.vehicle.jeep.toLocaleString()}</p>
+                                            <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Jeep Safari</p>
+                                        </div>
+                                        <div className="text-center p-3 rounded-xl" style={{ background: 'var(--bg-secondary)' }}>
+                                            <p className="font-semibold">₹{poi.entryFees.vehicle.elephant.toLocaleString()}</p>
+                                            <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Elephant Safari</p>
+                                        </div>
+                                    </div>
+                                </section>
 
-                                    {/* Actions */}
-                                    <div className="p-6 space-y-3">
+                                {/* How to Reach */}
+                                <section className="heritage-card p-6">
+                                    <h2 className="text-xl font-bold mb-4 flex items-center gap-2" style={{ fontFamily: 'var(--font-heading)' }}>
+                                        <Navigation className="w-5 h-5" style={{ color: 'var(--tea-garden)' }} />
+                                        How to Reach
+                                    </h2>
+                                    <div className="space-y-3">
+                                        <div className="p-3 rounded-xl" style={{ background: 'var(--bg-secondary)' }}>
+                                            <div className="flex items-center gap-2 mb-1">
+                                                <span className="text-lg">✈️</span>
+                                                <span className="font-medium">{poi.howToReach.nearestAirport.name}</span>
+                                            </div>
+                                            <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
+                                                {poi.howToReach.nearestAirport.distance} • {poi.howToReach.nearestAirport.time}
+                                            </p>
+                                        </div>
+                                        <div className="p-3 rounded-xl" style={{ background: 'var(--bg-secondary)' }}>
+                                            <div className="flex items-center gap-2 mb-1">
+                                                <span className="text-lg">🚂</span>
+                                                <span className="font-medium">{poi.howToReach.nearestRailway.name}</span>
+                                            </div>
+                                            <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
+                                                {poi.howToReach.nearestRailway.distance} • {poi.howToReach.nearestRailway.time}
+                                            </p>
+                                        </div>
+                                        <div className="p-3 rounded-xl" style={{ background: 'var(--bg-secondary)' }}>
+                                            <div className="flex items-center gap-2 mb-1">
+                                                <span className="text-lg">🚗</span>
+                                                <span className="font-medium">From Guwahati</span>
+                                            </div>
+                                            <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
+                                                {poi.howToReach.fromGuwahati.distance} • {poi.howToReach.fromGuwahati.time}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <Link href="/how-to-reach" className="btn-ghost mt-4 w-full">
+                                        View Full Travel Guide
+                                        <ChevronRight className="w-4 h-4" />
+                                    </Link>
+                                </section>
+
+                                {/* Contact */}
+                                <section className="heritage-card p-6">
+                                    <h2 className="text-xl font-bold mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
+                                        Contact
+                                    </h2>
+                                    <div className="space-y-3">
+                                        <a href={`tel:${poi.contact.phone}`} className="flex items-center gap-3 text-sm">
+                                            <Phone className="w-4 h-4" style={{ color: 'var(--tea-garden)' }} />
+                                            {poi.contact.phone}
+                                        </a>
+                                        <a href={`mailto:${poi.contact.email}`} className="flex items-center gap-3 text-sm">
+                                            <Globe className="w-4 h-4" style={{ color: 'var(--tea-garden)' }} />
+                                            {poi.contact.email}
+                                        </a>
                                         <a
-                                            href={`https://www.google.com/maps/dir/?api=1&destination=${POI.latitude},${POI.longitude}`}
+                                            href={poi.contact.website}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="btn-primary w-full justify-center"
+                                            className="flex items-center gap-3 text-sm"
                                         >
-                                            <Navigation className="w-5 h-5" />
-                                            Get Directions
+                                            <ExternalLink className="w-4 h-4" style={{ color: 'var(--tea-garden)' }} />
+                                            Official Website
                                         </a>
-                                        <button className="btn-secondary w-full justify-center">
-                                            <Calendar className="w-5 h-5" />
-                                            Add to Itinerary
-                                        </button>
                                     </div>
+                                </section>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Sidebar */}
+                    <div className="lg:col-span-1">
+                        <div className="sticky top-20 space-y-6">
+                            {/* Quick Actions */}
+                            <div className="heritage-card p-6">
+                                <a
+                                    href={`https://www.google.com/maps/dir/?api=1&destination=${poi.location.lat},${poi.location.lng}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="btn-primary w-full mb-3"
+                                >
+                                    <Navigation className="w-4 h-4" />
+                                    Get Directions
+                                </a>
+                                <Link href={`/experiences?location=${poi.slug}`} className="btn-ghost w-full">
+                                    View Experiences
+                                </Link>
+                            </div>
+
+                            {/* Nearby Stays */}
+                            <div className="heritage-card p-6">
+                                <h3 className="font-semibold mb-4">Where to Stay</h3>
+                                <div className="space-y-3">
+                                    {poi.nearbyStays.map((stay, idx) => (
+                                        <div
+                                            key={idx}
+                                            className="p-3 rounded-xl"
+                                            style={{ background: 'var(--bg-secondary)' }}
+                                        >
+                                            <div className="flex items-center justify-between">
+                                                <div>
+                                                    <p className="font-medium text-sm">{stay.name}</p>
+                                                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
+                                                        {stay.type} • {stay.distance}
+                                                    </p>
+                                                </div>
+                                                <div className="flex items-center gap-1 text-sm">
+                                                    <Star className="w-3 h-3" style={{ color: 'var(--muga-gold)', fill: 'var(--muga-gold)' }} />
+                                                    {stay.rating}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
+                                <Link href="/stays" className="btn-ghost w-full mt-4 text-sm">
+                                    View All Stays
+                                </Link>
+                            </div>
+
+                            {/* Source Info */}
+                            <div
+                                className="p-4 rounded-xl text-xs"
+                                style={{ background: 'var(--bg-secondary)' }}
+                            >
+                                <p className="flex items-center gap-2 mb-1">
+                                    <Check className="w-3 h-3" style={{ color: 'var(--success)' }} />
+                                    <span className="font-medium">{poi.infoSource}</span>
+                                </p>
+                                <p style={{ color: 'var(--text-muted)' }}>
+                                    Last updated: {poi.lastUpdated}
+                                </p>
                             </div>
                         </div>
                     </div>
-                </section>
-            </main>
-
-            <Footer />
-            <ChatWidget />
+                </div>
+            </div>
         </div>
     );
 }

@@ -1,5 +1,5 @@
 {
-  "name": "guenark",
+  "name": "rhinoroam",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,16 +11,20 @@
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:seed": "npx ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts",
-    "db:studio": "prisma studio"
+    "db:seed:assam": "npx ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed-assam.ts",
+    "db:studio": "prisma studio",
+    "test": "vitest"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.1",
     "@prisma/client": "^6.19.2",
     "@tanstack/react-query": "^5.90.20",
+    "@types/leaflet": "^1.9.21",
     "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
+    "leaflet": "^1.9.4",
     "lucide-react": "^0.563.0",
     "mapbox-gl": "^3.18.1",
     "next": "16.1.4",
@@ -28,20 +32,26 @@
     "openai": "^6.16.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "react-leaflet": "^5.0.0",
     "tailwind-merge": "^3.4.0",
     "zustand": "^5.0.10"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.2",
     "@types/bcryptjs": "^2.4.6",
     "@types/mapbox-gl": "^3.4.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^5.1.2",
     "eslint": "^9",
     "eslint-config-next": "16.1.4",
+    "jsdom": "^27.4.0",
     "prisma": "^6.19.2",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.0.18"
   }
 }
