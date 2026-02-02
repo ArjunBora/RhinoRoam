@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import {
     Menu, X, Search, MapPin, Calendar, Users, Compass,
@@ -31,7 +32,7 @@ const navLinks = [
         label: 'Plan',
         href: '#',
         children: [
-            { label: 'Trip Planner', href: '/plan', icon: <Calendar className="w-4 h-4" /> },
+            { label: 'Plan', href: '/plan', icon: <Calendar className="w-4 h-4" /> },
             { label: 'Best Time to Visit', href: '/seasonality', icon: <Clock className="w-4 h-4" /> },
             { label: 'How to Reach', href: '/how-to-reach', icon: <MapPin className="w-4 h-4" /> },
         ]
@@ -99,25 +100,21 @@ export default function Navigation() {
                     <div className="flex items-center justify-between h-16 md:h-20">
                         {/* Logo */}
                         <Link href="/" className="flex items-center gap-2">
-                            <div
-                                className="w-10 h-10 rounded-xl flex items-center justify-center"
-                                style={{
-                                    background: hasTransparentHeader && !isScrolled
-                                        ? 'rgba(255,255,255,0.2)'
-                                        : 'var(--gradient-tea)'
-                                }}
-                            >
-                                <span className="text-lg font-bold text-white">🦏</span>
-                            </div>
-                            <span
-                                className="text-xl font-bold hidden sm:block"
-                                style={{
-                                    fontFamily: 'var(--font-heading)',
-                                    color: textColor
-                                }}
-                            >
-                                RhinoRoam
-                            </span>
+                            <Image
+                                src="/logo.png"
+                                alt="RhinoRoam Logo"
+                                width={40}
+                                height={40}
+                                className="object-contain"
+                                unoptimized
+                            />
+                            <Image
+                                src="/name-style.png"
+                                alt="RhinoRoam"
+                                width={120}
+                                height={28}
+                                className={`object-contain hidden sm:block ${hasTransparentHeader && !isScrolled ? 'invert' : ''}`}
+                            />
                         </Link>
 
                         {/* Desktop Navigation */}
@@ -182,18 +179,7 @@ export default function Navigation() {
 
                         {/* Right Side */}
                         <div className="flex items-center gap-3">
-                            {/* Search */}
-                            <button
-                                className="p-2 rounded-xl transition-colors"
-                                style={{
-                                    color: textColor,
-                                    background: hasTransparentHeader && !isScrolled
-                                        ? 'rgba(255,255,255,0.1)'
-                                        : 'var(--bg-secondary)'
-                                }}
-                            >
-                                <Search className="w-5 h-5" />
-                            </button>
+
 
                             {/* User Menu */}
                             {status === 'authenticated' ? (

@@ -539,7 +539,7 @@ export default function SeasonalityPage() {
                                 Ready to plan your {months.find(m => m.id === selectedMonth)?.name} trip?
                             </h3>
                             <div className="flex flex-wrap justify-center gap-4">
-                                <Link href="/plan" className="btn-primary">
+                                <Link href="/ai-trip-planner" className="btn-primary">
                                     Plan My Trip
                                 </Link>
                                 <Link href="/experiences" className="btn-ghost">

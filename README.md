@@ -1,13 +1,14 @@
-# AxomConnect - Discover Assam Through Local Eyes
+# RhinoRoam - Discover Assam Through Local Eyes
 
 <div align="center">
-  <img src="public/logo.png" alt="AxomConnect Logo" width="120" />
+  <img src="public/logo.png" alt="RhinoRoam Logo" width="120" />
   
-  **AxomConnect** is a community-powered tourism platform connecting travelers with authentic Assam experiences. Built with passion for Assam's cultural heritage, natural beauty, and the warmth of its communities.
+  **RhinoRoam** is a community-powered tourism platform connecting travelers with authentic Assam experiences. Built with passion for Assam's cultural heritage, natural beauty, and the warmth of its communities.
 
   [![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/)
   [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/)
   [![Prisma](https://img.shields.io/badge/Prisma-6-2D3748?logo=prisma)](https://www.prisma.io/)
+  [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
   [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 </div>
 
@@ -15,24 +16,30 @@
 
 ## 🌿 Vision
 
-AxomConnect transforms how travelers discover Assam - moving beyond conventional tourism to create meaningful connections with local communities. We empower local guides, artisans, homestay owners, and cultural ambassadors to share their authentic stories while ensuring tourism benefits reach the grassroots.
+RhinoRoam transforms how travelers discover Assam - moving beyond conventional tourism to create meaningful connections with local communities. We empower local guides, artisans, homestay owners, and cultural ambassadors to share their authentic stories while ensuring tourism benefits reach the grassroots.
 
 ---
 
 ## ✨ Key Features
 
-### 🏠 For Travelers
-- **Curated Experiences** - Wildlife safaris, tea trails, tribal immersions, river journeys
-- **Community Hosts** - Connect directly with verified local guides and homestays
-- **AI Trip Planner** - Personalized itinerary generation
-- **Festivals Calendar** - Never miss Bihu, Bwisagu, Ali Aye Ligang, or any festival
-- **District Explorer** - Discover all 35 districts of Assam
+### 🗺️ Explore & Navigate
+- **Interactive Map** (`/map`) - A dynamic, filterable map powered by Leaflet. Discover POIs across categories like Wildlife, Heritage, Temples, and Tea Gardens with real-time distance and details.
+- **Heritage Trails** (`/trails`) - Curated walking and driving routes (e.g., "Ahom Heritage Trail", "Majuli Cultural Trail"). Includes stop-by-stop guides, duration, and tips.
+- **District Explorer** (`/districts`) - Comprehensive resources for exploring all 35 districts of Assam, highlighting unique local attractions or specific tribal cultures.
 
-### 👥 For Hosts
-- **Easy Registration** - 4-step application process
-- **Profile Dashboard** - Manage experiences, bookings, and reviews
-- **Verification Badge** - Build trust with verified host status
-- **Direct Earnings** - Community-first pricing model
+### 🤖 AI & Smart Tools
+- **AI Trip Planner** (`/plan`) - Generates personalized itineraries (3-14 days) based on user preferences for budget, pace, interests (Wildlife, Tea, Tribal), and travel dates.
+- **AI Travel Assistant** - Integrated Chat Widget that answers queries about local customs, travel logistics, and history in real-time.
+
+### 🌿 Immersive Content
+- **Curated Collections** (`/collections`) - Themed travel collections such as "Dibru-Saikhowa Wild Horses", "River Rafting Adventures", and "Tea Garden Stays".
+- **Travel Stories** (`/stories`) - A community-driven blog featuring authentic accounts from travelers ("Stories from the Road"), complete with reading times, tags, and author profiles.
+- **Festivals Calendar** (`/festivals`) - A detailed calendar of 23+ festivals (Bihu, Baishagu, Ali Aye Ligang) with cultural context and dates.
+
+### 👥 Community & Hosts
+- **Verified Local Hosts** - Connect directly with homestay owners and guides who have been vetted for quality and authenticity.
+- **Direct Bookings** - Seamless booking flow for experiences and stays.
+- **Host Registration** - Easy onboarding for locals to list their services and share their culture.
 
 ---
 
@@ -40,22 +47,22 @@ AxomConnect transforms how travelers discover Assam - moving beyond conventional
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                      AxomConnect Platform                    │
+│                       RhinoRoam Platform                    │
 ├─────────────────────────────────────────────────────────────┤
-│                                                              │
-│  ┌─────────────┐   ┌─────────────┐   ┌─────────────┐       │
-│  │   Frontend  │   │     API     │   │   Database  │       │
-│  │   Next.js   │◄─►│   Routes    │◄─►│  PostgreSQL │       │
-│  │   App Dir   │   │  /api/*     │   │   + Prisma  │       │
-│  └─────────────┘   └─────────────┘   └─────────────┘       │
-│         │                │                                   │
-│         ▼                ▼                                   │
+│                                                             │
+│  ┌─────────────┐   ┌─────────────┐   ┌─────────────┐        │
+│  │   Frontend  │   │     API     │   │   Database  │        │
+│  │   Next.js   │◄─►│   Routes    │◄─►│  PostgreSQL │        │
+│  │   App Dir   │   │  /api/*     │   │   + Prisma  │        │
+│  └─────────────┘   └─────────────┘   └─────────────┘        │
+│         │                │                                  │
+│         ▼                ▼                                  │
 │  ┌─────────────┐   ┌─────────────┐                          │
 │  │   Design    │   │   External  │                          │
 │  │   System    │   │   Services  │                          │
 │  │  (globals)  │   │ OpenAI/Maps │                          │
 │  └─────────────┘   └─────────────┘                          │
-│                                                              │
+│                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -73,10 +80,6 @@ Our design system draws inspiration from Assam's rich cultural heritage:
 | **Mekhela Red** | `#B71C1C` | Traditional Mekhela Sador |
 | **Gamusa Pattern** | Decorative borders | Assamese gamusa motifs |
 
-### Typography
-- **Headings**: Lora (serif) - Elegant, cultural
-- **Body**: Nunito (sans-serif) - Clear, modern
-
 ---
 
 ## 📂 Project Structure
@@ -85,38 +88,28 @@ Our design system draws inspiration from Assam's rich cultural heritage:
 src/
 ├── app/
 │   ├── page.tsx                    # Homepage
+│   ├── map/page.tsx                # Interactive Map
+│   ├── plan/page.tsx               # AI Trip Planner
+│   ├── stories/page.tsx            # Travel Stories & Blog
+│   ├── trails/page.tsx             # Heritage Trails
 │   ├── festivals/page.tsx          # Festivals Calendar
 │   ├── districts/page.tsx          # District Explorer
-│   ├── experiences/
-│   │   ├── page.tsx               # All Experiences
-│   │   └── [slug]/page.tsx        # Experience Detail
+│   ├── experiences/                # Experiences Listings
 │   ├── collections/page.tsx        # Curated Collections
 │   ├── communities/page.tsx        # Community Hosts
-│   ├── hosts/
-│   │   ├── [slug]/page.tsx        # Host Profile
-│   │   └── register/page.tsx      # Become a Host
-│   ├── plan/page.tsx              # AI Trip Planner
-│   ├── auth/signin/page.tsx       # Authentication
-│   └── api/
-│       ├── experiences/route.ts   # Experiences API
-│       ├── districts/route.ts     # Districts API
-│       ├── festivals/route.ts     # Festivals API
-│       ├── hosts/route.ts         # Hosts API
-│       ├── bookings/route.ts      # Bookings API
-│       ├── collections/route.ts   # Collections API
-│       └── chat/route.ts          # AI Chat API
+│   ├── hosts/                      # Host Profiles & Register
+│   └── api/                        # Backend API Routes
+│       ├── chat/                   # AI Chat Endpoint
+│       └── ...                     # Other Resource Endpoints
 ├── components/
-│   ├── layout/
-│   │   ├── Navigation.tsx         # Site navigation
-│   │   └── Footer.tsx             # Site footer
-│   ├── booking/
-│   │   └── BookingModal.tsx       # Booking wizard
-│   └── providers/
-│       └── AuthProvider.tsx       # NextAuth provider
+│   ├── map/                        # Map-specific components
+│   ├── chat/                       # Chat Widget components
+│   ├── layout/                     # Navigation & Footer
+│   └── providers/                  # Context Providers
 ├── lib/
-│   ├── prisma.ts                  # Prisma client
-│   └── utils.ts                   # Utility functions
-└── globals.css                     # Design system
+│   ├── prisma.ts                   # DB Client
+│   └── utils.ts                    # Helpers
+└── globals.css                     # Design System (Tailwind)
 ```
 
 ---
@@ -126,21 +119,20 @@ src/
 ### Prerequisites
 - Node.js 18+
 - PostgreSQL database
-- pnpm/npm/yarn
+- npm / pnpm / yarn
 
 ### Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/axomconnect.git
-cd axomconnect
+git clone https://github.com/your-org/rhinoroam.git
+cd rhinoroam
 
 # Install dependencies
 npm install
 
 # Set up environment variables
 cp .env.example .env
-# Edit .env with your database and API keys
 
 # Generate Prisma client
 npm run db:generate
@@ -159,20 +151,16 @@ npm run dev
 
 ```env
 # Database
-DATABASE_URL="postgresql://user:password@localhost:5432/axomconnect"
+DATABASE_URL="postgresql://user:password@localhost:5432/rhinoroam"
 
 # NextAuth
 NEXTAUTH_SECRET="your-secret-key"
 NEXTAUTH_URL="http://localhost:3000"
 
-# Google OAuth (optional)
-GOOGLE_CLIENT_ID="your-google-client-id"
-GOOGLE_CLIENT_SECRET="your-google-client-secret"
-
-# OpenAI (for AI features)
+# AI Integration
 OPENAI_API_KEY="your-openai-api-key"
 
-# Mapbox (for maps)
+# Maps (Optional/If Mapbox used)
 NEXT_PUBLIC_MAPBOX_TOKEN="your-mapbox-token"
 ```
 
@@ -183,80 +171,42 @@ NEXT_PUBLIC_MAPBOX_TOKEN="your-mapbox-token"
 | Page | Route | Description |
 |------|-------|-------------|
 | **Homepage** | `/` | Hero, featured experiences, collections, festivals |
-| **Festivals** | `/festivals` | 23+ festivals with filters |
+| **Interactive Map** | `/map` | Filters, categories, distance tracking |
+| **Heritage Trails** | `/trails` | Curated itineraries & guides |
+| **Trip Planner** | `/plan` | AI-powered planning & customization |
+| **Travel Stories** | `/stories` | Blog & community stories |
+| **Festivals** | `/festivals` | 23+ festivals with cultural context |
 | **Districts** | `/districts` | All 35 Assam districts |
 | **Experiences** | `/experiences` | Browse all experiences |
-| **Experience Detail** | `/experiences/[slug]` | Full booking page |
 | **Collections** | `/collections` | 8 curated collections |
-| **Community Hosts** | `/communities` | Browse hosts |
 | **Host Profile** | `/hosts/[slug]` | Host details & experiences |
 | **Become a Host** | `/hosts/register` | Host registration |
-| **Trip Planner** | `/plan` | AI-powered planning |
-| **Sign In** | `/auth/signin` | Authentication |
-
----
-
-## 🗓️ Featured Festivals
-
-| Festival | Month | Type | Community |
-|----------|-------|------|-----------|
-| Bhogali Bihu | January | State | All |
-| Me-Dam-Me-Phi | January | Tribal | Tai-Ahom |
-| Jonbeel Mela | January | Regional | Multi-tribal |
-| Ali Aye Ligang | February | Tribal | Mising |
-| Rongali Bihu | April | State | All |
-| Bwisagu | April | Tribal | Bodo |
-| Rongker | April | Tribal | Karbi |
-| Ambubachi Mela | June | Religious | All |
-| Durga Puja | October | State | All |
-| Kati Bihu | October | State | All |
-
----
-
-## 🧪 API Endpoints
-
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/experiences` | GET, POST | List/create experiences |
-| `/api/experiences/[slug]` | GET | Get experience details |
-| `/api/districts` | GET | List districts |
-| `/api/festivals` | GET | List festivals with filters |
-| `/api/hosts` | GET, POST | List/register hosts |
-| `/api/bookings` | GET, POST | List/create bookings |
-| `/api/collections` | GET | List collections |
-| `/api/chat` | POST | AI chat responses |
 
 ---
 
 ## 📅 Roadmap
 
-### ✅ Phase 1: Foundation (Complete)
+### ✅ Phase 1: Foundation & Discovery (Complete)
 - [x] Design system with Assam-inspired aesthetics
 - [x] Homepage with story-driven layout  
-- [x] Festivals calendar with 23+ festivals
-- [x] Districts explorer (35 districts)
-- [x] Experience listings and detail pages
-- [x] Curated collections
-- [x] Community hosts directory
-- [x] AI trip planner interface
-- [x] Database schema for all features
+- [x] Interactive Experience Map
+- [x] Heritage Trails & Collections
+- [x] Stories & Blog Section
+- [x] Festivals calendar
+- [x] AI Trip Planner Interface
 
-### 🔄 Phase 2: Community Features (In Progress)
-- [x] Host profile pages
-- [x] Host registration flow
-- [x] Booking modal component
-- [x] API endpoints for all features
-- [ ] Payment integration (Razorpay)
-- [ ] Email notifications
-- [ ] Reviews system
+### 🔄 Phase 2: Community & Connectivity (In Progress)
+- [x] Host Search & Profiles
+- [x] Booking System UI
+- [x] AI Chat Assistant
+- [ ] Payment Gateway Integration
+- [ ] User Reviews & Ratings System
 
-### 📋 Phase 3: Advanced Features (Planned)
-- [ ] Host dashboard
-- [ ] User dashboard with bookings
-- [ ] Map-based district exploration
-- [ ] Offline PWA support
-- [ ] Multi-language support (Assamese, Hindi)
-- [ ] Real-time chat with hosts
+### 📋 Phase 3: Expansion (Planned)
+- [ ] Host Dashboard for managing listings
+- [ ] Mobile PWA with offline support
+- [ ] Multilingual Support (Assamese, Hindi)
+- [ ] Real-time messaging between hosts and travelers
 
 ---
 
@@ -278,19 +228,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## 🙏 Acknowledgments
-
-- **Assam Tourism** - For inspiring this project
-- **Local Communities** - For sharing their stories and traditions
-- **Contributors** - For making this platform possible
-
----
-
 <div align="center">
   <p>Made with ❤️ in Assam 🍵</p>
   <p>
-    <a href="https://axomconnect.com">Website</a> •
-    <a href="https://twitter.com/axomconnect">Twitter</a> •
-    <a href="https://instagram.com/axomconnect">Instagram</a>
+    <a href="https://rhinoroam.com">Website</a> •
+    <a href="https://twitter.com/rhinoroam">Twitter</a> •
+    <a href="https://instagram.com/rhinoroam">Instagram</a>
   </p>
 </div>

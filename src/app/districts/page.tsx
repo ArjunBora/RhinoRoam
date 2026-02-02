@@ -43,7 +43,7 @@ const allDistricts: District[] = [
         highlights: ['Tea Garden Stays', 'Heritage Bungalows', 'River Islands'],
         experienceCount: 28,
         hostCount: 45,
-        image: 'https://images.unsplash.com/photo-1597318109527-4d700f12b5c3?w=600&q=80',
+        image: '/images/tea-garden-stay-plucking.webp',
         specialties: ['Tea Tourism', 'Colonial Heritage', 'River Cruises']
     },
     {
@@ -99,7 +99,7 @@ const allDistricts: District[] = [
         highlights: ['Ancient Satras', 'Mask Making', 'Mising Villages', 'Raas Leela'],
         experienceCount: 42,
         hostCount: 65,
-        image: 'https://images.unsplash.com/photo-1587474260584-136574528ed5?w=600&q=80',
+        image: '/images/majuli-island-heritage-walk.webp',
         specialties: ['Satra Culture', 'Mask Arts', 'Tribal Villages']
     },
     {
@@ -127,7 +127,7 @@ const allDistricts: District[] = [
         highlights: ['Ali Aye Ligang', 'Stilted Houses', 'Tribal Cuisine'],
         experienceCount: 12,
         hostCount: 28,
-        image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=600&q=80',
+        image: '/images/mising-tribal-village-stay.webp',
         specialties: ['Mising Culture', 'Festivals', 'Tribal Homestays']
     },
     {
@@ -156,7 +156,7 @@ const allDistricts: District[] = [
         highlights: ['Kamakhya Temple', 'Brahmaputra Cruise', 'Assam State Museum'],
         experienceCount: 55,
         hostCount: 120,
-        image: 'https://images.unsplash.com/photo-1587474260584-136574528ed5?w=600&q=80',
+        image: '/images/brahmaputra-river-cruise.webp',
         specialties: ['Religious Tourism', 'River Cruises', 'Urban Heritage']
     },
     {
@@ -170,7 +170,7 @@ const allDistricts: District[] = [
         highlights: ['Sualkuchi Weaving', 'Hajo Pilgrimage', 'Madan Kamdev'],
         experienceCount: 35,
         hostCount: 58,
-        image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80',
+        image: '/images/muga-silk-weaving-workshop.webp',
         specialties: ['Silk Weaving', 'Religious Sites', 'Ancient Temples']
     },
     {
@@ -184,7 +184,7 @@ const allDistricts: District[] = [
         highlights: ['Kaziranga Safari', 'One-Horned Rhino', 'Tea Gardens'],
         experienceCount: 38,
         hostCount: 52,
-        image: 'https://images.unsplash.com/photo-1551085254-e96b210db58a?w=600&q=80',
+        image: '/images/kaziranga-safari-conservation.webp',
         specialties: ['Wildlife Safari', 'Conservation', 'Nature Lodges']
     },
     {

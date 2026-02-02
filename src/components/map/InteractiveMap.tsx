@@ -19,8 +19,8 @@ interface InteractiveMapProps {
 
 export function InteractiveMap({
     className,
-    initialCenter = [76.5, 15.335], // Default to Hampi, India
-    initialZoom = 12,
+    initialCenter = [91.7, 26.1], // Default to Guwahati, Assam
+    initialZoom = 7,
     markers = [],
     onMarkerClick,
     showControls = true,
@@ -51,6 +51,7 @@ export function InteractiveMap({
             zoom: initialZoom,
             interactive,
             attributionControl: false,
+            maxBounds: [[89.5, 24.0], [96.5, 28.5]], // Limit to Assam region
         });
 
         if (showControls) {

@@ -406,7 +406,7 @@ export default function TrailsPage() {
                     <p className="mb-6" style={{ color: 'var(--text-secondary)' }}>
                         Let our AI create a personalized itinerary based on your interests, duration, and travel style.
                     </p>
-                    <Link href="/plan" className="btn-primary">
+                    <Link href="/ai-trip-planner" className="btn-primary">
                         Create Custom Trail
                     </Link>
                 </div>

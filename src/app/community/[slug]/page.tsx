@@ -1,5 +1,4 @@
-import { Header, Footer } from "@/components/ui/navigation";
-import { ChatWidget } from "@/components/chat/ChatWidget";
+import { Footer } from "@/components/ui/navigation";
 import { InteractiveMap } from "@/components/map/InteractiveMap";
 import Link from "next/link";
 import {
@@ -169,9 +168,7 @@ Traditional music and dance are integral to life here, especially during festiva
 export default function CBTVillageDetailPage({ params }: { params: { slug: string } }) {
     return (
         <div className="min-h-screen flex flex-col">
-            <Header />
-
-            <main className="flex-1 pt-[var(--header-height)]">
+            <main className="flex-1">
                 {/* Hero */}
                 <section className="relative h-[60vh]">
                     <img
@@ -533,7 +530,6 @@ export default function CBTVillageDetailPage({ params }: { params: { slug: strin
             </main>
 
             <Footer />
-            <ChatWidget />
         </div>
     );
 }

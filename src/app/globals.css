@@ -339,6 +339,12 @@ h6 {
   color: var(--success);
 }
 
+.home-featured-experiences .badge-muga,
+.home-featured-experiences .badge-verified {
+  color: white;
+  background: rgba(0, 0, 0, 0.25);
+}
+
 .badge-festival {
   background: linear-gradient(135deg, rgba(201, 162, 39, 0.2) 0%, rgba(211, 47, 47, 0.15) 100%);
   color: var(--mekhela-red);

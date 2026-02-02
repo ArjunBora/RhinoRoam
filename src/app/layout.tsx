@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { AuthProvider } from "@/components/providers/AuthProvider";
+import { Header } from "@/components/ui/navigation";
+import { ChatWidget } from "@/components/chat/ChatWidget";
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -36,23 +38,23 @@ export const metadata: Metadata = {
   },
 };
 
-import { ChatWidget } from "@/components/chat/ChatWidget";
-
-// ... existing imports ...
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased">
+    <html lang="en" className="h-full">
+      <body className="antialiased h-full min-h-screen">
         <AuthProvider>
-          {children}
+          <Header />
+          <main className="pt-[var(--header-height)]">
+            {children}
+          </main>
           <ChatWidget />
         </AuthProvider>
       </body>
     </html>
   );
 }
+

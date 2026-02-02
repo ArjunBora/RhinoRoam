@@ -41,12 +41,12 @@ const collections: Collection[] = [
         icon: <Bird className="w-8 h-8" />,
         color: 'var(--forest-kaziranga)',
         gradient: 'linear-gradient(135deg, #1B4D3E 0%, #2E7D32 100%)',
-        image: 'https://images.unsplash.com/photo-1551085254-e96b210db58a?w=1200&q=80',
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/One_horn_Rhinoceros_at_Kaziranga_national_park.jpg/1280px-One_horn_Rhinoceros_at_Kaziranga_national_park.jpg',
         experienceCount: 12,
         featured: [
-            { title: 'Kaziranga Rhino Safari', slug: 'kaziranga-rhino-safari', image: 'https://images.unsplash.com/photo-1551085254-e96b210db58a?w=400&q=80', location: 'Golaghat' },
-            { title: 'Manas Tiger Reserve', slug: 'manas-tiger-safari', image: 'https://images.unsplash.com/photo-1551085254-e96b210db58a?w=400&q=80', location: 'Baksa' },
-            { title: 'Dibru-Saikhowa Wild Horses', slug: 'dibru-wild-horses', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80', location: 'Tinsukia' },
+            { title: 'Kaziranga Rhino Safari', slug: 'kaziranga-rhino-safari', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/One_horn_Rhinoceros_at_Kaziranga_national_park.jpg/400px-One_horn_Rhinoceros_at_Kaziranga_national_park.jpg', location: 'Golaghat' },
+            { title: 'Manas Tiger Reserve', slug: 'manas-tiger-safari', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Manas_national_park.jpg/400px-Manas_national_park.jpg', location: 'Baksa' },
+            { title: 'Dibru-Saikhowa Wild Horses', slug: 'dibru-wild-horses', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Kamakhya_Temple%2C_Guwahati.jpg/400px-Kamakhya_Temple%2C_Guwahati.jpg', location: 'Tinsukia' },
         ]
     },
     {
@@ -58,12 +58,12 @@ const collections: Collection[] = [
         icon: <Leaf className="w-8 h-8" />,
         color: 'var(--tea-garden)',
         gradient: 'linear-gradient(135deg, #2D5016 0%, #558B2F 100%)',
-        image: 'https://images.unsplash.com/photo-1597318109527-4d700f12b5c3?w=1200&q=80',
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Muga_silk_weaving_in_Assam.jpg/1280px-Muga_silk_weaving_in_Assam.jpg',
         experienceCount: 18,
         featured: [
-            { title: 'Mancotta Heritage Stay', slug: 'mancotta-heritage', image: 'https://images.unsplash.com/photo-1597318109527-4d700f12b5c3?w=400&q=80', location: 'Dibrugarh' },
-            { title: 'Tea Plucking Experience', slug: 'tea-plucking', image: 'https://images.unsplash.com/photo-1597318109527-4d700f12b5c3?w=400&q=80', location: 'Jorhat' },
-            { title: 'Tocklai Tea Research Tour', slug: 'tocklai-tour', image: 'https://images.unsplash.com/photo-1597318109527-4d700f12b5c3?w=400&q=80', location: 'Jorhat' },
+            { title: 'Mancotta Heritage Stay', slug: 'mancotta-heritage', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Muga_silk_weaving_in_Assam.jpg/400px-Muga_silk_weaving_in_Assam.jpg', location: 'Dibrugarh' },
+            { title: 'Tea Plucking Experience', slug: 'tea-plucking', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Muga_silk_weaving_in_Assam.jpg/400px-Muga_silk_weaving_in_Assam.jpg', location: 'Jorhat' },
+            { title: 'Tocklai Tea Research Tour', slug: 'tocklai-tour', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Muga_silk_weaving_in_Assam.jpg/400px-Muga_silk_weaving_in_Assam.jpg', location: 'Jorhat' },
         ]
     },
     {
@@ -75,12 +75,12 @@ const collections: Collection[] = [
         icon: <Waves className="w-8 h-8" />,
         color: 'var(--brahma-blue)',
         gradient: 'linear-gradient(135deg, #0D3B4C 0%, #1E5F74 100%)',
-        image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&q=80',
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Umananda_Island.jpg/1280px-Umananda_Island.jpg',
         experienceCount: 8,
         featured: [
-            { title: 'Brahmaputra Luxury Cruise', slug: 'brahmaputra-cruise', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&q=80', location: 'Guwahati - Majuli' },
-            { title: 'Majuli Island Hopping', slug: 'majuli-island-hop', image: 'https://images.unsplash.com/photo-1587474260584-136574528ed5?w=400&q=80', location: 'Majuli' },
-            { title: 'Dolphin Watching Safari', slug: 'dolphin-safari', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&q=80', location: 'Jorhat' },
+            { title: 'Brahmaputra Luxury Cruise', slug: 'brahmaputra-cruise', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Umananda_Island.jpg/400px-Umananda_Island.jpg', location: 'Guwahati - Majuli' },
+            { title: 'Majuli Island Hopping', slug: 'majuli-island-hop', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Kamalabari_Satra%2C_Majuli.jpg/400px-Kamalabari_Satra%2C_Majuli.jpg', location: 'Majuli' },
+            { title: 'Dolphin Watching Safari', slug: 'dolphin-safari', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Umananda_Island.jpg/400px-Umananda_Island.jpg', location: 'Jorhat' },
         ]
     },
     {
@@ -92,12 +92,12 @@ const collections: Collection[] = [
         icon: <Tent className="w-8 h-8" />,
         color: 'var(--mekhela-red)',
         gradient: 'linear-gradient(135deg, #B71C1C 0%, #C62828 100%)',
-        image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1200&q=80',
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Bodo_woman.jpg/1280px-Bodo_woman.jpg',
         experienceCount: 24,
         featured: [
-            { title: 'Mising Village Homestay', slug: 'mising-homestay', image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=400&q=80', location: 'Dhemaji' },
-            { title: 'Bodo Cultural Immersion', slug: 'bodo-immersion', image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=400&q=80', location: 'Kokrajhar' },
-            { title: 'Karbi Hill Village Trek', slug: 'karbi-trek', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80', location: 'Karbi Anglong' },
+            { title: 'Mising Village Homestay', slug: 'mising-homestay', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Bodo_woman.jpg/400px-Bodo_woman.jpg', location: 'Dhemaji' },
+            { title: 'Bodo Cultural Immersion', slug: 'bodo-immersion', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Bodo_woman.jpg/400px-Bodo_woman.jpg', location: 'Kokrajhar' },
+            { title: 'Karbi Hill Village Trek', slug: 'karbi-trek', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Karbi_Anglong_Assam.jpg/400px-Karbi_Anglong_Assam.jpg', location: 'Karbi Anglong' },
         ]
     },
     {
@@ -109,12 +109,12 @@ const collections: Collection[] = [
         icon: <Sparkles className="w-8 h-8" />,
         color: 'var(--muga-gold)',
         gradient: 'linear-gradient(135deg, #C9A227 0%, #D4AF37 100%)',
-        image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80',
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Muga_silk_weaving_in_Assam.jpg/1280px-Muga_silk_weaving_in_Assam.jpg',
         experienceCount: 15,
         featured: [
-            { title: 'Muga Silk Workshop', slug: 'muga-workshop', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80', location: 'Sualkuchi' },
-            { title: 'Eri Silk Farm Visit', slug: 'eri-farm', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80', location: 'Kamrup' },
-            { title: 'Traditional Loom Experience', slug: 'loom-experience', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80', location: 'Nagaon' },
+            { title: 'Muga Silk Workshop', slug: 'muga-workshop', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Muga_silk_weaving_in_Assam.jpg/400px-Muga_silk_weaving_in_Assam.jpg', location: 'Sualkuchi' },
+            { title: 'Eri Silk Farm Visit', slug: 'eri-farm', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Muga_silk_weaving_in_Assam.jpg/400px-Muga_silk_weaving_in_Assam.jpg', location: 'Kamrup' },
+            { title: 'Traditional Loom Experience', slug: 'loom-experience', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Muga_silk_weaving_in_Assam.jpg/400px-Muga_silk_weaving_in_Assam.jpg', location: 'Nagaon' },
         ]
     },
     {
@@ -126,12 +126,12 @@ const collections: Collection[] = [
         icon: <Compass className="w-8 h-8" />,
         color: 'var(--earth-assam)',
         gradient: 'linear-gradient(135deg, #5D4037 0%, #795548 100%)',
-        image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80',
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Haflong_Lake.jpg/1280px-Haflong_Lake.jpg',
         experienceCount: 32,
         featured: [
-            { title: 'Haflong Lake & Hills', slug: 'haflong-experience', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80', location: 'Dima Hasao' },
-            { title: 'Madan Kamdev Ruins', slug: 'madan-kamdev', image: 'https://images.unsplash.com/photo-1580744569308-23dc45de0d88?w=400&q=80', location: 'Kamrup' },
-            { title: 'Jatinga Mystery Tour', slug: 'jatinga-tour', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80', location: 'Dima Hasao' },
+            { title: 'Haflong Lake & Hills', slug: 'haflong-experience', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Haflong_Lake.jpg/400px-Haflong_Lake.jpg', location: 'Dima Hasao' },
+            { title: 'Madan Kamdev Ruins', slug: 'madan-kamdev', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Rang_Ghar%2C_Sivasagar.jpg/400px-Rang_Ghar%2C_Sivasagar.jpg', location: 'Kamrup' },
+            { title: 'Jatinga Mystery Tour', slug: 'jatinga-tour', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Haflong_Lake.jpg/400px-Haflong_Lake.jpg', location: 'Dima Hasao' },
         ]
     },
     {
@@ -143,11 +143,11 @@ const collections: Collection[] = [
         icon: <Mountain className="w-8 h-8" />,
         color: 'var(--brahma-deep)',
         gradient: 'linear-gradient(135deg, #0D3B4C 0%, #37474F 100%)',
-        image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80',
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Karbi_Anglong_Assam.jpg/1280px-Karbi_Anglong_Assam.jpg',
         experienceCount: 14,
         featured: [
-            { title: 'Dehing Patkai Trek', slug: 'dehing-trek', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80', location: 'Tinsukia' },
-            { title: 'River Rafting Adventure', slug: 'river-rafting', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&q=80', location: 'Sonitpur' },
+            { title: 'Dehing Patkai Trek', slug: 'dehing-trek', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Karbi_Anglong_Assam.jpg/400px-Karbi_Anglong_Assam.jpg', location: 'Tinsukia' },
+            { title: 'River Rafting Adventure', slug: 'river-rafting', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Umananda_Island.jpg/400px-Umananda_Island.jpg', location: 'Sonitpur' },
             { title: 'Cave Exploration', slug: 'cave-exploration', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80', location: 'Dima Hasao' },
         ]
     },
@@ -314,7 +314,7 @@ export default function CollectionsPage() {
                         Tell us your interests and travel dates, and we'll create a personalized
                         itinerary combining the best of Assam.
                     </p>
-                    <Link href="/plan" className="btn-primary">
+                    <Link href="/ai-trip-planner" className="btn-primary">
                         Plan My Trip
                         <ArrowRight className="w-4 h-4" />
                     </Link>

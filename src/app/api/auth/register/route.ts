@@ -14,6 +14,9 @@ export async function POST(request: NextRequest) {
             );
         }
 
+        // MOCK REGISTRATION
+        // Skip DB check and creation
+        /*
         // Check if user already exists
         const existingUser = await prisma.user.findUnique({
             where: { email },
@@ -43,6 +46,15 @@ export async function POST(request: NextRequest) {
                 createdAt: true,
             },
         });
+        */
+
+        // Mock success response
+        const user = {
+            id: "mock-user-id",
+            email,
+            name: name || email.split("@")[0],
+            createdAt: new Date(),
+        };
 
         return NextResponse.json({ success: true, data: user }, { status: 201 });
     } catch (error) {

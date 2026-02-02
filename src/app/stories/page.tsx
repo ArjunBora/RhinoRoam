@@ -1,5 +1,4 @@
-import { Header, Footer } from "@/components/ui/navigation";
-import { ChatWidget } from "@/components/chat/ChatWidget";
+import { Footer } from "@/components/ui/navigation";
 import Link from "next/link";
 import {
     BookOpen,
@@ -116,9 +115,7 @@ export default function StoriesPage() {
 
     return (
         <div className="min-h-screen flex flex-col">
-            <Header />
-
-            <main className="flex-1 pt-[var(--header-height)]">
+            <main className="flex-1">
                 {/* Hero Section */}
                 <section className="py-16 md:py-20 bg-gradient-to-b from-[var(--neutral-900)] to-[var(--neutral-800)]">
                     <div className="container-custom">
@@ -158,8 +155,8 @@ export default function StoriesPage() {
                                 <button
                                     key={tag}
                                     className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${tag === "All"
-                                            ? "bg-gradient-heritage text-white"
-                                            : "bg-[var(--bg-secondary)] text-[var(--text-secondary)] hover:bg-[var(--border-light)]"
+                                        ? "bg-gradient-heritage text-white"
+                                        : "bg-[var(--bg-secondary)] text-[var(--text-secondary)] hover:bg-[var(--border-light)]"
                                         }`}
                                 >
                                     {tag}
@@ -331,7 +328,7 @@ export default function StoriesPage() {
             </main>
 
             <Footer />
-            <ChatWidget />
         </div>
     );
 }
+

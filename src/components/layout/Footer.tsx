@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import {
     MapPin, Mail, Phone, Facebook, Instagram, Twitter, Youtube,
     Heart, Leaf
@@ -17,7 +18,7 @@ const footerLinks = {
         { label: 'Districts', href: '/districts' },
         { label: 'Collections', href: '/collections' },
         { label: 'Festivals', href: '/festivals' },
-        { label: 'Plan Trip', href: '/plan' },
+        { label: 'Plan', href: '/plan' },
     ],
     categories: [
         { label: 'Wildlife Safari', href: '/experiences?collection=wildlife' },
@@ -47,10 +48,10 @@ const footerLinks = {
 };
 
 const socialLinks = [
-    { icon: <Facebook className="w-5 h-5" />, href: 'https://facebook.com/axomconnect', label: 'Facebook' },
-    { icon: <Instagram className="w-5 h-5" />, href: 'https://instagram.com/axomconnect', label: 'Instagram' },
-    { icon: <Twitter className="w-5 h-5" />, href: 'https://twitter.com/axomconnect', label: 'Twitter' },
-    { icon: <Youtube className="w-5 h-5" />, href: 'https://youtube.com/axomconnect', label: 'YouTube' },
+    { icon: <Facebook className="w-5 h-5" />, href: 'https://facebook.com/rhinoroam', label: 'Facebook' },
+    { icon: <Instagram className="w-5 h-5" />, href: 'https://instagram.com/rhinoroam', label: 'Instagram' },
+    { icon: <Twitter className="w-5 h-5" />, href: 'https://twitter.com/rhinoroam', label: 'Twitter' },
+    { icon: <Youtube className="w-5 h-5" />, href: 'https://youtube.com/rhinoroam', label: 'YouTube' },
 ];
 
 export default function Footer() {
@@ -65,18 +66,21 @@ export default function Footer() {
                     {/* Brand */}
                     <div className="col-span-2 md:col-span-3 lg:col-span-1">
                         <Link href="/" className="flex items-center gap-2 mb-4">
-                            <div
-                                className="w-10 h-10 rounded-xl flex items-center justify-center"
-                                style={{ background: 'var(--gradient-tea)' }}
-                            >
-                                <span className="text-lg font-bold text-white">অ</span>
-                            </div>
-                            <span
-                                className="text-xl font-bold"
-                                style={{ fontFamily: 'var(--font-heading)' }}
-                            >
-                                RhinoRoam
-                            </span>
+                            <Image
+                                src="/logo.png"
+                                alt="RhinoRoam Logo"
+                                width={40}
+                                height={40}
+                                className="object-contain"
+                                unoptimized
+                            />
+                            <Image
+                                src="/name-style.png"
+                                alt="RhinoRoam"
+                                width={120}
+                                height={28}
+                                className="object-contain"
+                            />
                         </Link>
                         <p className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>
                             Discover Assam through local eyes. Community-powered tourism connecting
@@ -184,7 +188,7 @@ export default function Footer() {
                             </li>
                             <li className="flex items-center gap-2 text-sm" style={{ color: 'var(--text-secondary)' }}>
                                 <Mail className="w-4 h-4" style={{ color: 'var(--tea-garden)' }} />
-                                hello@axomconnect.com
+                                hello@rhinoroam.com
                             </li>
                             <li className="flex items-center gap-2 text-sm" style={{ color: 'var(--text-secondary)' }}>
                                 <Phone className="w-4 h-4" style={{ color: 'var(--tea-garden)' }} />

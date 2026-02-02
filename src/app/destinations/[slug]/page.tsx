@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Header, Footer } from "@/components/ui/navigation";
-import { ChatWidget } from "@/components/chat/ChatWidget";
+import { Footer } from "@/components/ui/navigation";
 import { InteractiveMap } from "@/components/map/InteractiveMap";
 import Link from "next/link";
 import {
@@ -205,9 +204,7 @@ export default function DestinationDetailPage({ params }: { params: { slug: stri
 
     return (
         <div className="min-h-screen flex flex-col">
-            <Header />
-
-            <main className="flex-1 pt-[var(--header-height)]">
+            <main className="flex-1">
                 {/* Hero Section */}
                 <section className="relative h-[50vh] md:h-[60vh]">
                     <img
@@ -326,7 +323,7 @@ export default function DestinationDetailPage({ params }: { params: { slug: stri
                                     <div className="p-6 bg-[var(--bg-card)] rounded-2xl shadow-[var(--shadow-md)]">
                                         <h4 className="font-semibold mb-4">Quick Actions</h4>
                                         <div className="space-y-3">
-                                            <Link href="/plan" className="btn-primary w-full justify-center">
+                                            <Link href="/ai-trip-planner" className="btn-primary w-full justify-center">
                                                 <Calendar className="w-4 h-4" />
                                                 Plan Your Trip
                                             </Link>
@@ -664,7 +661,6 @@ export default function DestinationDetailPage({ params }: { params: { slug: stri
             </main>
 
             <Footer />
-            <ChatWidget />
         </div>
     );
 }

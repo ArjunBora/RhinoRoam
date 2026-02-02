@@ -6,8 +6,7 @@ import prisma from "@/lib/db";
 import bcrypt from "bcryptjs";
 
 export const authOptions: NextAuthOptions = {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    adapter: PrismaAdapter(prisma) as any,
+    // adapter: PrismaAdapter(prisma) as any, // Disabled for mock auth
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID || "",
@@ -20,33 +19,23 @@ export const authOptions: NextAuthOptions = {
                 password: { label: "Password", type: "password" },
             },
             async authorize(credentials) {
+                // MOCK AUTHENTICATION
+                // Accepting any email/password for demo purposes
                 if (!credentials?.email || !credentials?.password) {
                     throw new Error("Invalid credentials");
                 }
 
-                const user = await prisma.user.findUnique({
-                    where: { email: credentials.email },
-                });
+                // Simulate DB call delay
+                // await new Promise(resolve => setTimeout(resolve, 500));
 
-                if (!user || !user.password) {
-                    throw new Error("Invalid credentials");
-                }
-
-                const isCorrectPassword = await bcrypt.compare(
-                    credentials.password,
-                    user.password
-                );
-
-                if (!isCorrectPassword) {
-                    throw new Error("Invalid credentials");
-                }
-
-                return {
-                    id: user.id,
-                    email: user.email,
-                    name: user.name,
-                    image: user.avatarUrl,
+                const mockUser = {
+                    id: "mock-user-id",
+                    email: credentials.email,
+                    name: credentials.email.split("@")[0] || "Demo User",
+                    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80",
                 };
+
+                return mockUser;
             },
         }),
     ],

@@ -1,5 +1,4 @@
-import { Header, Footer } from "@/components/ui/navigation";
-import { ChatWidget } from "@/components/chat/ChatWidget";
+import { Footer } from "@/components/ui/navigation";
 import Link from "next/link";
 import {
     MapPin,
@@ -109,9 +108,7 @@ const GUIDES = [
 export default function CommunityPage() {
     return (
         <div className="min-h-screen flex flex-col">
-            <Header />
-
-            <main className="flex-1 pt-[var(--header-height)]">
+            <main className="flex-1">
                 {/* Hero Section */}
                 <section className="relative py-20 md:py-28 bg-gradient-to-b from-[var(--neutral-900)] to-[var(--neutral-800)] overflow-hidden">
                     <div className="absolute inset-0">
@@ -380,7 +377,9 @@ export default function CommunityPage() {
                 {/* CTA Section */}
                 <section className="py-20 bg-gradient-heritage relative overflow-hidden">
                     <div className="absolute inset-0 opacity-10">
-                        <div className="absolute inset-0 bg-[url('/images/pattern.svg')] bg-repeat" />
+                        <div
+                            className="absolute inset-0"
+                        />
                     </div>
 
                     <div className="container-custom relative z-10 text-center">
@@ -406,7 +405,6 @@ export default function CommunityPage() {
             </main>
 
             <Footer />
-            <ChatWidget />
         </div>
     );
 }

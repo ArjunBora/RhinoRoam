@@ -22,7 +22,9 @@ function HeroSection() {
             {/* Background */}
             <div className="absolute inset-0 bg-gradient-to-b from-[var(--neutral-900)] to-[var(--neutral-800)]">
                 <div className="absolute inset-0 opacity-30">
-                    <div className="absolute inset-0 bg-[url('/images/hero-pattern.svg')] bg-repeat opacity-10" />
+                    <div
+                        className="absolute inset-0 opacity-10"
+                    />
                 </div>
                 {/* Animated gradient orbs */}
                 <div className="absolute top-20 left-20 w-96 h-96 bg-[var(--heritage-gold)]/20 rounded-full blur-3xl animate-pulse" />
@@ -96,28 +98,28 @@ function HeroSection() {
 function FeaturedDestinations() {
     const destinations = [
         {
-            name: "Hampi",
-            slug: "hampi",
-            tagline: "The Forgotten Empire",
-            image: "https://images.unsplash.com/photo-1590059390047-f5e67e4d2c6c?w=800&q=80",
-            pois: 45,
-            trails: 5,
-        },
-        {
-            name: "Varanasi",
-            slug: "varanasi",
-            tagline: "City of Light",
-            image: "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?w=800&q=80",
-            pois: 38,
+            name: "Kaziranga",
+            slug: "kaziranga",
+            tagline: "Home of the One-Horned Rhino",
+            image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/One_horn_Rhinoceros_at_Kaziranga_national_park.jpg/1280px-One_horn_Rhinoceros_at_Kaziranga_national_park.jpg",
+            pois: 12,
             trails: 4,
         },
         {
-            name: "Jaipur",
-            slug: "jaipur",
-            tagline: "The Pink City",
-            image: "https://images.unsplash.com/photo-1599661046289-e31897846e41?w=800&q=80",
-            pois: 52,
-            trails: 6,
+            name: "Majuli",
+            slug: "majuli",
+            tagline: "World's Largest River Island",
+            image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Kamalabari_Satra%2C_Majuli.jpg/1280px-Kamalabari_Satra%2C_Majuli.jpg",
+            pois: 15,
+            trails: 3,
+        },
+        {
+            name: "Sivasagar",
+            slug: "sivasagar",
+            tagline: "Heart of Ahom Heritage",
+            image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Rang_Ghar%2C_Sivasagar.jpg/1280px-Rang_Ghar%2C_Sivasagar.jpg",
+            pois: 18,
+            trails: 5,
         },
     ];
 
@@ -128,9 +130,9 @@ function FeaturedDestinations() {
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
                     <div>
                         <span className="badge badge-heritage mb-3">Featured</span>
-                        <h2 className="text-4xl font-heading font-bold">Heritage Destinations</h2>
+                        <h2 className="text-4xl font-heading font-bold">Explore Assam</h2>
                         <p className="text-[var(--text-secondary)] mt-2 max-w-xl">
-                            Explore UNESCO World Heritage Sites and hidden cultural gems across India
+                            Discover UNESCO World Heritage Sites, hidden gems, and vibrant cultures of Northeast India
                         </p>
                     </div>
                     <Link
@@ -363,9 +365,9 @@ function CTASection() {
                         <Compass className="w-5 h-5" />
                         Start Exploring
                     </Link>
-                    <Link href="/plan" className="btn-ghost text-white hover:bg-white/10 text-lg px-8 py-4">
-                        <Calendar className="w-5 h-5" />
-                        Plan Your Trip
+                    <Link href="/ai-trip-planner" className="btn-ghost text-white hover:bg-white/10 text-lg px-8 py-4">
+                        <Sparkles className="w-5 h-5" />
+                        AI Trip Planner
                     </Link>
                 </div>
             </div>

@@ -101,7 +101,7 @@ export default function DashboardPage() {
     // For demo purposes, show dashboard even without session
     const user = session?.user || {
         name: 'Demo User',
-        email: 'demo@axomconnect.com',
+        email: 'demo@rhinoroam.com',
         image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80',
     };
 
@@ -276,7 +276,7 @@ export default function DashboardPage() {
                         <div>
                             <h2 className="text-lg font-semibold mb-4">Quick Actions</h2>
                             <div className="heritage-card divide-y divide-[var(--border-light)]">
-                                <Link href="/plan" className="flex items-center gap-3 p-4 hover:bg-secondary transition-colors">
+                                <Link href="/ai-trip-planner" className="flex items-center gap-3 p-4 hover:bg-secondary transition-colors">
                                     <MapPin className="w-5 h-5" style={{ color: 'var(--tea-garden)' }} />
                                     <span>Plan a Trip</span>
                                     <ChevronRight className="w-4 h-4 ml-auto" />

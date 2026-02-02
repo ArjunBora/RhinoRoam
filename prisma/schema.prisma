@@ -1,4 +1,4 @@
-// GUenARK Tourism & Heritage Platform - Database Schema
+// RhinoRoam Tourism & Heritage Platform - Database Schema
 // Using PostgreSQL
 
 generator client {

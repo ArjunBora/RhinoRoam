@@ -1,12 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
-  Search, MapPin, Calendar, Users, Compass, Mountain,
+  MapPin, Calendar, Users, Compass, Mountain,
   TreePine, Waves, Tent, Camera, Star, ArrowRight,
-  ChevronDown, Heart, Play, Sparkles, Leaf, Bird
+  ChevronDown, Heart, Play, Sparkles, Leaf, Bird, User
 } from 'lucide-react';
 
 /* ============================================
@@ -71,7 +71,7 @@ const featuredExperiences: Experience[] = [
     district: 'Majuli',
     category: 'Cultural Heritage',
     duration: '2 days',
-    image: 'https://images.unsplash.com/photo-1587474260584-136574528ed5?w=600&q=80',
+    image: '/images/majuli-island-heritage-walk.webp',
     rating: 4.9,
     reviews: 324,
     isFeatured: true
@@ -84,7 +84,7 @@ const featuredExperiences: Experience[] = [
     district: 'Golaghat',
     category: 'Wildlife',
     duration: '3 days',
-    image: 'https://images.unsplash.com/photo-1551085254-e96b210db58a?w=600&q=80',
+    image: '/images/kaziranga-safari-conservation.webp',
     rating: 4.8,
     reviews: 567,
     price: 12000,
@@ -98,7 +98,7 @@ const featuredExperiences: Experience[] = [
     district: 'Kamrup',
     category: 'Artisan Craft',
     duration: '1 day',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80',
+    image: '/images/muga-silk-weaving-workshop.webp',
     rating: 4.7,
     reviews: 189,
     price: 2500
@@ -111,7 +111,7 @@ const featuredExperiences: Experience[] = [
     district: 'Dibrugarh',
     category: 'Agri Tourism',
     duration: '2 days',
-    image: 'https://images.unsplash.com/photo-1597318109527-4d700f12b5c3?w=600&q=80',
+    image: '/images/tea-garden-stay-plucking.webp',
     rating: 4.9,
     reviews: 412,
     price: 8000,
@@ -125,7 +125,7 @@ const featuredExperiences: Experience[] = [
     district: 'Dhemaji',
     category: 'Tribal Immersion',
     duration: '3 days',
-    image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=600&q=80',
+    image: '/images/mising-tribal-village-stay.webp',
     rating: 4.8,
     reviews: 156,
     price: 6000
@@ -138,7 +138,7 @@ const featuredExperiences: Experience[] = [
     district: 'Kamrup Metro',
     category: 'River Journey',
     duration: '4 days',
-    image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80',
+    image: '/images/brahmaputra-river-cruise.webp',
     rating: 4.9,
     reviews: 234,
     price: 45000,
@@ -151,7 +151,7 @@ const collections: Collection[] = [
     id: 'wildlife',
     title: 'Wildlife Safaris',
     description: 'One-horned rhinos, elephants & rare birds',
-    image: 'https://images.unsplash.com/photo-1551085254-e96b210db58a?w=600&q=80',
+    image: '/images/kaziranga-safari-conservation.webp',
     count: 12,
     color: 'var(--forest-kaziranga)',
     icon: <Bird className="w-6 h-6" />
@@ -160,7 +160,7 @@ const collections: Collection[] = [
     id: 'tea',
     title: 'Tea Trails',
     description: 'Heritage gardens & plantation stays',
-    image: 'https://images.unsplash.com/photo-1597318109527-4d700f12b5c3?w=600&q=80',
+    image: '/images/tea-garden-stay-plucking.webp',
     count: 18,
     color: 'var(--tea-garden)',
     icon: <Leaf className="w-6 h-6" />
@@ -169,7 +169,7 @@ const collections: Collection[] = [
     id: 'river',
     title: 'River Journeys',
     description: 'Brahmaputra expeditions & island hopping',
-    image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80',
+    image: '/images/brahmaputra-river-cruise.webp',
     count: 8,
     color: 'var(--brahma-blue)',
     icon: <Waves className="w-6 h-6" />
@@ -178,7 +178,7 @@ const collections: Collection[] = [
     id: 'tribal',
     title: 'Tribal Immersions',
     description: 'Stay with Mising, Bodo, Karbi communities',
-    image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=600&q=80',
+    image: '/images/mising-tribal-village-stay.webp',
     count: 24,
     color: 'var(--mekhela-red)',
     icon: <Tent className="w-6 h-6" />
@@ -187,7 +187,7 @@ const collections: Collection[] = [
     id: 'handloom',
     title: 'Handloom Heritage',
     description: 'Muga silk, Eri weaving workshops',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80',
+    image: '/images/muga-silk-weaving-workshop.webp',
     count: 15,
     color: 'var(--muga-gold)',
     icon: <Sparkles className="w-6 h-6" />
@@ -292,11 +292,11 @@ const upcomingFestivals: Festival[] = [
 ];
 
 const districts: District[] = [
-  { id: '1', name: 'Kamrup Metro', slug: 'kamrup-metro', region: 'Central', image: 'https://images.unsplash.com/photo-1587474260584-136574528ed5?w=400&q=80', experienceCount: 45 },
-  { id: '2', name: 'Golaghat', slug: 'golaghat', region: 'Central', image: 'https://images.unsplash.com/photo-1551085254-e96b210db58a?w=400&q=80', experienceCount: 23 },
-  { id: '3', name: 'Majuli', slug: 'majuli', region: 'Central', image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=400&q=80', experienceCount: 18 },
+  { id: '1', name: 'Kamrup Metro', slug: 'kamrup-metro', region: 'Central', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Rangia_city_in_2024.jpg/2560px-Rangia_city_in_2024.jpg', experienceCount: 45 },
+  { id: '2', name: 'Golaghat', slug: 'golaghat', region: 'Central', image: '/images/kaziranga-safari-conservation.webp', experienceCount: 23 },
+  { id: '3', name: 'Majuli', slug: 'majuli', region: 'Central', image: '/images/majuli-island-heritage-walk.webp', experienceCount: 18 },
   { id: '4', name: 'Sivasagar', slug: 'sivasagar', region: 'Upper', image: 'https://images.unsplash.com/photo-1580744569308-23dc45de0d88?w=400&q=80', experienceCount: 32 },
-  { id: '5', name: 'Dibrugarh', slug: 'dibrugarh', region: 'Upper', image: 'https://images.unsplash.com/photo-1597318109527-4d700f12b5c3?w=400&q=80', experienceCount: 28 }
+  { id: '5', name: 'Dibrugarh', slug: 'dibrugarh', region: 'Upper', image: '/images/tea-garden-stay-plucking.webp', experienceCount: 28 }
 ];
 
 // Category filter pills
@@ -311,73 +311,16 @@ const categories = [
 
 export default function HomePage() {
   const [activeCategory, setActiveCategory] = useState('all');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-primary)' }}>
-      {/* Navigation */}
-      <nav
-        className={`nav-header transition-all duration-300 ${isScrolled ? 'shadow-md' : 'bg-transparent border-transparent'
-          }`}
-        style={{
-          background: isScrolled ? 'var(--glass-bg)' : 'transparent',
-          backdropFilter: isScrolled ? 'blur(16px)' : 'none'
-        }}
-      >
-        <div className="container-custom h-full flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3">
-            <div
-              className="w-10 h-10 rounded-xl flex items-center justify-center"
-              style={{ background: 'var(--gradient-tea)' }}
-            >
-              <span className="text-white font-bold text-lg">অ</span>
-            </div>
-            <span
-              className="text-xl font-semibold"
-              style={{ fontFamily: 'var(--font-heading)', color: isScrolled ? 'var(--text-primary)' : 'white' }}
-            >
-              RhinoRoam
-            </span>
-          </Link>
-
-          <div className="hidden md:flex items-center gap-1">
-            {['Explore', 'Experiences', 'Communities', 'Festivals', 'Plan Trip'].map((item) => (
-              <Link
-                key={item}
-                href={`/${item.toLowerCase().replace(' ', '-')}`}
-                className="nav-link"
-                style={{ color: isScrolled ? 'var(--text-secondary)' : 'rgba(255,255,255,0.9)' }}
-              >
-                {item}
-              </Link>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-4">
-            <button className="btn-ghost" style={{ color: isScrolled ? 'var(--text-secondary)' : 'white' }}>
-              For Hosts
-            </button>
-            <button className="btn-primary">
-              Sign In
-            </button>
-          </div>
-        </div>
-      </nav>
-
       {/* Hero Section */}
       <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
         {/* Background Video/Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://images.unsplash.com/photo-1587474260584-136574528ed5?w=1920&q=80"
-            alt="Assam Landscape"
+            src="/images/hero-page.jpg"
+            alt="Assam Landscape with Boat"
             fill
             className="object-cover"
             priority
@@ -424,26 +367,35 @@ export default function HomePage() {
             className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-10 animate-slide-up"
             style={{ animationDelay: '0.3s' }}
           >
-            Connect with communities, explore hidden trails, and immerse yourself
-            in the rich heritage of the Brahmaputra valley
+            From the golden threads of Muga silk to the hidden trails of the Brahmaputra,
+            immerse yourself in a land where every artisan has a story and every landscape a soul.
           </p>
 
-          {/* Search Box */}
-          <div className="animate-slide-up" style={{ animationDelay: '0.4s' }}>
-            <div className="search-hero mx-auto">
-              <Search className="w-5 h-5" style={{ color: 'var(--text-muted)' }} />
-              <input
-                type="text"
-                placeholder="Search experiences, places, festivals..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <button>
-                <span className="hidden sm:inline">Explore</span>
-                <ArrowRight className="w-5 h-5 sm:hidden" />
-              </button>
-            </div>
+          <div className="animate-slide-up mb-4" style={{ animationDelay: '0.35s' }}>
+            <span className="text-sm md:text-base text-white/90 font-medium bg-black/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10 text-gradient-muga">
+              ✨ Not sure where to start? Let our AI craft your perfect Assamese journey in seconds.
+            </span>
           </div>
+
+          <div className="flex flex-wrap justify-center gap-4 animate-slide-up mb-12" style={{ animationDelay: '0.4s' }}>
+            <Link
+              href="/auth/signin"
+              className="px-8 py-4 rounded-xl bg-[var(--tea-deep)] text-white font-bold hover:bg-[var(--forest-kaziranga)] transition-all transform hover:scale-105 active:scale-95 shadow-xl flex items-center gap-2"
+            >
+              <User className="w-5 h-5" />
+              Sign In to RhinoRoam
+            </Link>
+            <Link
+              href="/ai-trip-planner"
+              data-testid="ai-planner-link"
+              className="px-8 py-4 rounded-xl bg-white/10 backdrop-blur-md text-white border border-[var(--muga-gold)]/30 font-bold hover:bg-white/20 transition-all transform hover:scale-105 active:scale-95 flex items-center gap-2"
+            >
+              <Sparkles className="w-5 h-5" />
+              AI Trip Planner
+            </Link>
+          </div>
+
+
 
           {/* Quick Stats */}
           <div
@@ -471,51 +423,56 @@ export default function HomePage() {
       </section>
 
       {/* Experience Collections */}
-      <section className="section-padding">
+      <section className="section-padding" style={{ background: 'var(--eri-cream)' }}>
         <div className="container-custom">
-          <div className="text-center mb-12">
+          <div className="text-center mb-10">
             <h2
               className="text-3xl md:text-4xl font-bold mb-4"
               style={{ fontFamily: 'var(--font-heading)' }}
             >
               Curated <span className="text-gradient-tea">Collections</span>
             </h2>
-            <p style={{ color: 'var(--text-secondary)' }}>
-              Handpicked experiences crafted by local communities
+            <p className="max-w-2xl mx-auto text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+              From the lush jungles of <strong>Kaziranga</strong> to the golden <strong>Tea Trails</strong> of Upper Assam,
+              serene <strong>Brahmaputra River Journeys</strong>, authentic <strong>Tribal Immersions</strong> with the Mising
+              and Bodo communities, exquisite <strong>Muga Silk Handloom Heritage</strong>, and off-the-beaten-path
+              <strong> Hidden Gems</strong> — Assam offers a tapestry of experiences waiting to be discovered.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {collections.map((collection, index) => (
-              <Link
+          {/* Icon Row - Visual Accents */}
+          <div className="flex flex-wrap justify-center gap-6 md:gap-10 mb-10">
+            {collections.map((collection) => (
+              <div
                 key={collection.id}
-                href={`/collections/${collection.id}`}
-                className={`experience-card group p-5 text-center stagger-${index + 1} animate-slide-up`}
+                className="flex flex-col items-center gap-2 opacity-80"
+                title={collection.title}
               >
                 <div
-                  className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4 transition-transform group-hover:scale-110"
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center"
                   style={{ background: `${collection.color}15`, color: collection.color }}
                 >
                   {collection.icon}
                 </div>
-                <h3 className="font-semibold text-sm mb-1">{collection.title}</h3>
-                <p className="text-xs mb-2" style={{ color: 'var(--text-muted)' }}>
-                  {collection.description}
-                </p>
-                <span
-                  className="text-xs font-medium"
-                  style={{ color: collection.color }}
-                >
-                  {collection.count} experiences
+                <span className="text-xs font-medium" style={{ color: 'var(--text-muted)' }}>
+                  {collection.title}
                 </span>
-              </Link>
+              </div>
             ))}
+          </div>
+
+          {/* View All Collections CTA */}
+          <div className="text-center">
+            <Link href="/collections" className="btn-primary">
+              View All Collections
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>
 
       {/* Featured Experiences */}
-      <section className="section-padding" style={{ background: 'var(--bg-secondary)' }}>
+      <section className="section-padding home-featured-experiences" style={{ background: 'var(--bg-secondary)' }}>
         <div className="container-custom">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-10">
             <div>
@@ -650,7 +607,7 @@ export default function HomePage() {
                 Festivals & <span className="text-gradient-muga">Celebrations</span>
               </h2>
               <p style={{ color: 'var(--text-secondary)' }}>
-                Experience Assam's vibrant cultural calendar — from state festivities to intimate tribal ceremonies
+                Experience Assam&apos;s vibrant cultural calendar — from state festivities to intimate tribal ceremonies
               </p>
             </div>
             <Link href="/festivals" className="btn-secondary mt-4 md:mt-0">
@@ -725,24 +682,45 @@ export default function HomePage() {
               <Link
                 key={district.id}
                 href={`/districts/${district.slug}`}
-                className={`experience-card group overflow-hidden stagger-${index + 1} animate-scale-in`}
+                className={`experience-card group overflow-hidden stagger-${index + 1} animate-scale-in relative block`}
+                style={{ backgroundColor: '#1A3C34' }} // Dark forest green fallback
               >
-                <div className="relative h-40">
+                <div className="relative h-40 w-full">
+                  {/* Background Image - z-index 0 */}
                   <Image
                     src={district.image}
                     alt={district.name}
                     fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110 z-0"
                   />
+
+                  {/* Overlay Scrim - z-index 10 */}
                   <div
-                    className="absolute inset-0"
+                    className="absolute inset-0 z-10"
                     style={{
-                      background: 'linear-gradient(0deg, rgba(0,0,0,0.7) 0%, transparent 50%)'
+                      background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, transparent 100%)'
                     }}
                   />
-                  <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <h3 className="font-semibold text-white mb-1">{district.name}</h3>
-                    <p className="text-xs text-white/70">
+
+                  {/* Text Content - z-index 20 */}
+                  <div className="absolute bottom-0 left-0 w-full p-4 z-20 flex flex-col justify-end items-start text-left">
+                    <h3
+                      className="font-bold text-lg mb-1"
+                      style={{
+                        color: 'white',
+                        textShadow: '0 2px 10px rgba(0,0,0,0.5)'
+                      }}
+                    >
+                      {district.name}
+                    </h3>
+                    <p
+                      className="text-xs font-medium"
+                      style={{
+                        color: 'white',
+                        opacity: 0.9,
+                        textShadow: '0 2px 10px rgba(0,0,0,0.5)'
+                      }}
+                    >
                       {district.experienceCount} experiences • {district.region} Assam
                     </p>
                   </div>
@@ -818,21 +796,24 @@ export default function HomePage() {
           <div className="grid md:grid-cols-4 gap-12">
             <div>
               <Link href="/" className="flex items-center gap-3 mb-6">
-                <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center"
-                  style={{ background: 'var(--gradient-muga)' }}
-                >
-                  <span className="text-white font-bold text-lg">অ</span>
-                </div>
-                <span
-                  className="text-xl font-semibold text-white"
-                  style={{ fontFamily: 'var(--font-heading)' }}
-                >
-                  RhinoRoam
-                </span>
+                <Image
+                  src="/logo.png"
+                  alt="RhinoRoam Logo"
+                  width={40}
+                  height={40}
+                  className="object-contain"
+                  unoptimized
+                />
+                <Image
+                  src="/name-style.png"
+                  alt="RhinoRoam"
+                  width={120}
+                  height={28}
+                  className="object-contain invert"
+                />
               </Link>
               <p className="text-sm" style={{ color: 'var(--brahma-mist)' }}>
-                Connecting travelers with Assam's communities,
+                Connecting travelers with Assam&apos;s communities,
                 heritage, and hidden wonders since 2024.
               </p>
             </div>
@@ -875,7 +856,7 @@ export default function HomePage() {
           <div className="gamusa-border mt-12 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-sm" style={{ color: 'var(--brahma-mist)' }}>
-                © 2026 RhinoRoam. Made with ❤️ in Assam
+                © 2026 RhinoRoam
               </p>
               <div className="flex items-center gap-6 text-sm" style={{ color: 'var(--brahma-mist)' }}>
                 <Link href="/privacy">Privacy</Link>

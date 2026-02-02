@@ -35,7 +35,7 @@ This carefully crafted experience combines the magic of an early morning elephan
 Your local naturalist guide, with years of experience in the park, will share insights about conservation efforts, animal behavior, and the ecosystem of this remarkable landscape.`,
 
     images: [
-        'https://images.unsplash.com/photo-1551085254-e96b210db58a?w=1200&q=80',
+        '/images/kaziranga-safari-conservation.webp',
         'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1200&q=80',
         'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80',
         'https://images.unsplash.com/photo-1587474260584-136574528ed5?w=1200&q=80',
@@ -191,7 +191,7 @@ Your local naturalist guide, with years of experience in the park, will share in
             id: '2',
             title: 'Manas Tiger Reserve Safari',
             slug: 'manas-tiger-safari',
-            image: 'https://images.unsplash.com/photo-1551085254-e96b210db58a?w=400&q=80',
+            image: '/images/kaziranga-safari-conservation.webp',
             price: 14000,
             rating: 4.7,
             duration: '3 Days'
@@ -200,7 +200,7 @@ Your local naturalist guide, with years of experience in the park, will share in
             id: '3',
             title: 'Pobitora Wildlife Sanctuary',
             slug: 'pobitora-rhino-safari',
-            image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=400&q=80',
+            image: '/images/mising-tribal-village-stay.webp',
             price: 3500,
             rating: 4.5,
             duration: '1 Day'

@@ -36,6 +36,7 @@ export function ChatWidget() {
     const [messages, setMessages] = useState<Message[]>([INITIAL_MESSAGE]);
     const [input, setInput] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const [isNavigationOpen, setIsNavigationOpen] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
     const scrollToBottom = () => {
@@ -45,6 +46,18 @@ export function ChatWidget() {
     useEffect(() => {
         scrollToBottom();
     }, [messages]);
+
+    // Listen for navigation menu toggle
+    useEffect(() => {
+        const handleNavigationToggle = (event: CustomEvent<{ isOpen: boolean }>) => {
+            setIsNavigationOpen(event.detail.isOpen);
+        };
+
+        window.addEventListener('navigationMenuToggle', handleNavigationToggle as EventListener);
+        return () => {
+            window.removeEventListener('navigationMenuToggle', handleNavigationToggle as EventListener);
+        };
+    }, []);
 
     const handleSend = async (text?: string) => {
         const messageText = text || input.trim();
@@ -90,27 +103,38 @@ export function ChatWidget() {
 
     return (
         <>
-            {/* Chat Toggle Button */}
+            {/* Backdrop for click-outside close */}
+            {isOpen && (
+                <div
+                    className="fixed inset-0 z-40 bg-black/5 backdrop-blur-[1px] transition-all duration-300"
+                    onClick={() => setIsOpen(false)}
+                />
+            )}
+            {/* Chat Toggle Button - Hidden when navigation is open */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
                 className={cn(
                     "fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-xl transition-all duration-300",
-                    "bg-gradient-heritage text-white flex items-center justify-center",
+                    "bg-[var(--tea-deep)] text-white flex items-center justify-center",
+                    "border-2 border-[var(--muga-gold)]",
                     "hover:scale-110 hover:shadow-2xl",
-                    isOpen && "scale-0 opacity-0"
+                    (isOpen || isNavigationOpen) && "scale-0 opacity-0 pointer-events-none"
                 )}
+                aria-label="Open chat assistant"
             >
                 <MessageCircle className="w-6 h-6" />
                 <span className="absolute -top-1 -right-1 w-4 h-4 bg-[var(--success)] rounded-full animate-pulse" />
             </button>
 
-            {/* Chat Window */}
+
+
+            {/* Chat Window - Hidden when navigation is open */}
             <div
                 className={cn(
-                    "fixed bottom-6 right-6 z-50 w-[380px] max-w-[calc(100vw-48px)] h-[600px] max-h-[calc(100vh-100px)]",
+                    "fixed bottom-6 right-6 z-50 w-[350px] max-w-[calc(100vw-48px)] h-[600px] max-h-[calc(100vh-110px)]",
                     "bg-[var(--bg-card)] rounded-2xl shadow-2xl overflow-hidden",
                     "flex flex-col transition-all duration-300 origin-bottom-right",
-                    isOpen ? "scale-100 opacity-100" : "scale-0 opacity-0 pointer-events-none"
+                    (isOpen && !isNavigationOpen) ? "scale-100 opacity-100" : "scale-0 opacity-0 pointer-events-none"
                 )}
             >
                 {/* Header */}
@@ -231,7 +255,7 @@ export function ChatWidget() {
                         AI assistance for travel planning • Respect local customs
                     </p>
                 </div>
-            </div>
+            </div >
         </>
     );
 }
@@ -268,7 +292,7 @@ function getSimulatedActions(query: string): QuickAction[] {
 
     if (lowerQuery.includes("plan") || lowerQuery.includes("day")) {
         return [
-            { type: "plan_trip", label: "Create Itinerary", href: "/plan" },
+            { type: "plan_trip", label: "Create Itinerary", href: "/ai-trip-planner" },
             { type: "view_destination", label: "Explore Map", href: "/explore" },
         ];
     }

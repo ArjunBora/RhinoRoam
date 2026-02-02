@@ -1,5 +1,4 @@
-import { Header, Footer } from "@/components/ui/navigation";
-import { ChatWidget } from "@/components/chat/ChatWidget";
+import { Footer } from "@/components/ui/navigation";
 import Link from "next/link";
 import {
     MapPin,
@@ -104,9 +103,7 @@ const DESTINATIONS = [
 export default function DestinationsPage() {
     return (
         <div className="min-h-screen flex flex-col">
-            <Header />
-
-            <main className="flex-1 pt-[var(--header-height)]">
+            <main className="flex-1">
                 {/* Hero Section */}
                 <section className="bg-gradient-to-b from-[var(--neutral-900)] to-[var(--neutral-800)] py-16 md:py-24">
                     <div className="container-custom">
@@ -298,7 +295,6 @@ export default function DestinationsPage() {
             </main>
 
             <Footer />
-            <ChatWidget />
         </div>
     );
 }

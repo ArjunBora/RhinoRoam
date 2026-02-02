@@ -1,4 +1,4 @@
-// Common Types for GUenARK Platform
+// Common Types for RhinoRoam Platform - Assam Tourism
 
 export interface Destination {
     id: string;

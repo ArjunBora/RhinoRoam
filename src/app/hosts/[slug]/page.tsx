@@ -8,6 +8,8 @@ import {
     Check, Clock, Globe, Languages, Award, Calendar, Users,
     ChevronRight, Shield
 } from 'lucide-react';
+import { ReviewList } from '@/components/reviews/ReviewList';
+import { ReviewForm } from '@/components/reviews/ReviewForm';
 
 /* ============================================
    HOST PROFILE PAGE
@@ -370,8 +372,8 @@ export default function HostProfilePage({ params }: { params: Promise<{ slug: st
                         </section>
 
                         {/* Reviews */}
-                        <section className="heritage-card p-6">
-                            <div className="flex items-center justify-between mb-6">
+                        <section className="heritage-card p-6" id="reviews">
+                            <div className="flex items-center justify-between mb-8">
                                 <h2
                                     className="text-xl font-bold"
                                     style={{ fontFamily: 'var(--font-heading)' }}
@@ -385,53 +387,24 @@ export default function HostProfilePage({ params }: { params: Promise<{ slug: st
                                 </div>
                             </div>
 
-                            <div className="space-y-6">
-                                {host.reviews.map((review) => (
-                                    <div
-                                        key={review.id}
-                                        className="pb-6"
-                                        style={{ borderBottom: '1px solid var(--border-light)' }}
-                                    >
-                                        <div className="flex items-start gap-4">
-                                            <Image
-                                                src={review.avatar}
-                                                alt={review.author}
-                                                width={48}
-                                                height={48}
-                                                className="rounded-full object-cover"
-                                            />
-                                            <div className="flex-1">
-                                                <div className="flex items-center justify-between mb-1">
-                                                    <h4 className="font-semibold">{review.author}</h4>
-                                                    <span className="text-sm" style={{ color: 'var(--text-muted)' }}>
-                                                        {review.date}
-                                                    </span>
-                                                </div>
-                                                <div className="flex items-center gap-1 mb-2">
-                                                    {Array.from({ length: 5 }).map((_, i) => (
-                                                        <Star
-                                                            key={i}
-                                                            className="w-4 h-4"
-                                                            style={{
-                                                                color: i < review.rating ? 'var(--muga-gold)' : 'var(--border-light)',
-                                                                fill: i < review.rating ? 'var(--muga-gold)' : 'none'
-                                                            }}
-                                                        />
-                                                    ))}
-                                                </div>
-                                                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-                                                    {review.text}
-                                                </p>
-                                                <span
-                                                    className="inline-block text-xs mt-2 px-2 py-1 rounded-full"
-                                                    style={{ background: 'var(--bg-secondary)' }}
-                                                >
-                                                    {review.experience}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
+                            <div className="mb-10">
+                                <ReviewForm onSubmit={async (data) => {
+                                    // In a real app, this would be an API call
+                                    console.log('Submitted review:', data);
+                                    await new Promise(resolve => setTimeout(resolve, 1000));
+                                }} />
+                            </div>
+
+                            <div className="mb-6">
+                                <h3 className="font-semibold mb-4 text-lg">Recent Reviews</h3>
+                                <ReviewList reviews={host.reviews.map(r => ({
+                                    id: r.id,
+                                    userName: r.author,
+                                    userAvatar: r.avatar,
+                                    rating: r.rating,
+                                    date: r.date,
+                                    comment: r.text
+                                }))} />
                             </div>
 
                             <button className="btn-ghost w-full mt-4">

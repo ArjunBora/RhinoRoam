@@ -1,0 +1,1230 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Kamrup Metropolitan",
+                "headquarters": "Guwahati",
+                "population": 1260000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            91.58,
+                            26.35
+                        ],
+                        [
+                            91.58,
+                            26.05
+                        ],
+                        [
+                            91.95,
+                            26.05
+                        ],
+                        [
+                            91.95,
+                            26.35
+                        ],
+                        [
+                            91.58,
+                            26.35
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Kamrup",
+                "headquarters": "Amingaon",
+                "population": 1517000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            91.1,
+                            26.4
+                        ],
+                        [
+                            91.1,
+                            26.0
+                        ],
+                        [
+                            91.6,
+                            26.0
+                        ],
+                        [
+                            91.6,
+                            26.4
+                        ],
+                        [
+                            91.1,
+                            26.4
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Golaghat",
+                "headquarters": "Golaghat",
+                "population": 1066000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            93.6,
+                            26.8
+                        ],
+                        [
+                            93.6,
+                            26.3
+                        ],
+                        [
+                            94.2,
+                            26.3
+                        ],
+                        [
+                            94.2,
+                            26.8
+                        ],
+                        [
+                            93.6,
+                            26.8
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Nagaon",
+                "headquarters": "Nagaon",
+                "population": 2826000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            92.4,
+                            26.6
+                        ],
+                        [
+                            92.4,
+                            26.1
+                        ],
+                        [
+                            93.1,
+                            26.1
+                        ],
+                        [
+                            93.1,
+                            26.6
+                        ],
+                        [
+                            92.4,
+                            26.6
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Sivasagar",
+                "headquarters": "Sivasagar",
+                "population": 1151000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            94.4,
+                            27.0
+                        ],
+                        [
+                            94.4,
+                            26.6
+                        ],
+                        [
+                            95.1,
+                            26.6
+                        ],
+                        [
+                            95.1,
+                            27.0
+                        ],
+                        [
+                            94.4,
+                            27.0
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Dibrugarh",
+                "headquarters": "Dibrugarh",
+                "population": 1327000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            94.8,
+                            27.6
+                        ],
+                        [
+                            94.8,
+                            27.2
+                        ],
+                        [
+                            95.4,
+                            27.2
+                        ],
+                        [
+                            95.4,
+                            27.6
+                        ],
+                        [
+                            94.8,
+                            27.6
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Tinsukia",
+                "headquarters": "Tinsukia",
+                "population": 1327000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            95.2,
+                            27.6
+                        ],
+                        [
+                            95.2,
+                            27.0
+                        ],
+                        [
+                            96.0,
+                            27.0
+                        ],
+                        [
+                            96.0,
+                            27.6
+                        ],
+                        [
+                            95.2,
+                            27.6
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Jorhat",
+                "headquarters": "Jorhat",
+                "population": 1092000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            93.8,
+                            26.9
+                        ],
+                        [
+                            93.8,
+                            26.5
+                        ],
+                        [
+                            94.5,
+                            26.5
+                        ],
+                        [
+                            94.5,
+                            26.9
+                        ],
+                        [
+                            93.8,
+                            26.9
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Majuli",
+                "headquarters": "Garamur",
+                "population": 167000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            93.85,
+                            27.1
+                        ],
+                        [
+                            93.85,
+                            26.85
+                        ],
+                        [
+                            94.25,
+                            26.85
+                        ],
+                        [
+                            94.25,
+                            27.1
+                        ],
+                        [
+                            93.85,
+                            27.1
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Lakhimpur",
+                "headquarters": "North Lakhimpur",
+                "population": 1042000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            93.8,
+                            27.4
+                        ],
+                        [
+                            93.8,
+                            27.0
+                        ],
+                        [
+                            94.5,
+                            27.0
+                        ],
+                        [
+                            94.5,
+                            27.4
+                        ],
+                        [
+                            93.8,
+                            27.4
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Dhemaji",
+                "headquarters": "Dhemaji",
+                "population": 688000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            94.2,
+                            27.8
+                        ],
+                        [
+                            94.2,
+                            27.3
+                        ],
+                        [
+                            95.0,
+                            27.3
+                        ],
+                        [
+                            95.0,
+                            27.8
+                        ],
+                        [
+                            94.2,
+                            27.8
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Sonitpur",
+                "headquarters": "Tezpur",
+                "population": 1925000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            92.5,
+                            27.0
+                        ],
+                        [
+                            92.5,
+                            26.5
+                        ],
+                        [
+                            93.4,
+                            26.5
+                        ],
+                        [
+                            93.4,
+                            27.0
+                        ],
+                        [
+                            92.5,
+                            27.0
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Biswanath",
+                "headquarters": "Biswanath Chariali",
+                "population": 612000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            93.0,
+                            27.1
+                        ],
+                        [
+                            93.0,
+                            26.7
+                        ],
+                        [
+                            93.6,
+                            26.7
+                        ],
+                        [
+                            93.6,
+                            27.1
+                        ],
+                        [
+                            93.0,
+                            27.1
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Darrang",
+                "headquarters": "Mangaldai",
+                "population": 929000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            91.8,
+                            26.7
+                        ],
+                        [
+                            91.8,
+                            26.3
+                        ],
+                        [
+                            92.3,
+                            26.3
+                        ],
+                        [
+                            92.3,
+                            26.7
+                        ],
+                        [
+                            91.8,
+                            26.7
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Udalguri",
+                "headquarters": "Udalguri",
+                "population": 832000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            92.0,
+                            27.0
+                        ],
+                        [
+                            92.0,
+                            26.6
+                        ],
+                        [
+                            92.5,
+                            26.6
+                        ],
+                        [
+                            92.5,
+                            27.0
+                        ],
+                        [
+                            92.0,
+                            27.0
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Baksa",
+                "headquarters": "Mushalpur",
+                "population": 953000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            91.3,
+                            27.0
+                        ],
+                        [
+                            91.3,
+                            26.6
+                        ],
+                        [
+                            91.9,
+                            26.6
+                        ],
+                        [
+                            91.9,
+                            27.0
+                        ],
+                        [
+                            91.3,
+                            27.0
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Nalbari",
+                "headquarters": "Nalbari",
+                "population": 771000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            91.3,
+                            26.5
+                        ],
+                        [
+                            91.3,
+                            26.2
+                        ],
+                        [
+                            91.7,
+                            26.2
+                        ],
+                        [
+                            91.7,
+                            26.5
+                        ],
+                        [
+                            91.3,
+                            26.5
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Barpeta",
+                "headquarters": "Barpeta",
+                "population": 1693000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            90.7,
+                            26.6
+                        ],
+                        [
+                            90.7,
+                            26.2
+                        ],
+                        [
+                            91.3,
+                            26.2
+                        ],
+                        [
+                            91.3,
+                            26.6
+                        ],
+                        [
+                            90.7,
+                            26.6
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Bajali",
+                "headquarters": "Pathsala",
+                "population": 610000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            91.0,
+                            26.55
+                        ],
+                        [
+                            91.0,
+                            26.35
+                        ],
+                        [
+                            91.35,
+                            26.35
+                        ],
+                        [
+                            91.35,
+                            26.55
+                        ],
+                        [
+                            91.0,
+                            26.55
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Bongaigaon",
+                "headquarters": "Bongaigaon",
+                "population": 739000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            90.3,
+                            26.6
+                        ],
+                        [
+                            90.3,
+                            26.3
+                        ],
+                        [
+                            90.7,
+                            26.3
+                        ],
+                        [
+                            90.7,
+                            26.6
+                        ],
+                        [
+                            90.3,
+                            26.6
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Chirang",
+                "headquarters": "Kajalgaon",
+                "population": 482000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            90.3,
+                            26.9
+                        ],
+                        [
+                            90.3,
+                            26.5
+                        ],
+                        [
+                            90.7,
+                            26.5
+                        ],
+                        [
+                            90.7,
+                            26.9
+                        ],
+                        [
+                            90.3,
+                            26.9
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Kokrajhar",
+                "headquarters": "Kokrajhar",
+                "population": 887000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            89.8,
+                            26.7
+                        ],
+                        [
+                            89.8,
+                            26.3
+                        ],
+                        [
+                            90.4,
+                            26.3
+                        ],
+                        [
+                            90.4,
+                            26.7
+                        ],
+                        [
+                            89.8,
+                            26.7
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Dhubri",
+                "headquarters": "Dhubri",
+                "population": 1949000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            89.8,
+                            26.3
+                        ],
+                        [
+                            89.8,
+                            25.9
+                        ],
+                        [
+                            90.3,
+                            25.9
+                        ],
+                        [
+                            90.3,
+                            26.3
+                        ],
+                        [
+                            89.8,
+                            26.3
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "South Salmara-Mankachar",
+                "headquarters": "Hatsingimari",
+                "population": 555000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            89.6,
+                            25.9
+                        ],
+                        [
+                            89.6,
+                            25.5
+                        ],
+                        [
+                            90.0,
+                            25.5
+                        ],
+                        [
+                            90.0,
+                            25.9
+                        ],
+                        [
+                            89.6,
+                            25.9
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Goalpara",
+                "headquarters": "Goalpara",
+                "population": 1008000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            90.4,
+                            26.3
+                        ],
+                        [
+                            90.4,
+                            25.9
+                        ],
+                        [
+                            90.9,
+                            25.9
+                        ],
+                        [
+                            90.9,
+                            26.3
+                        ],
+                        [
+                            90.4,
+                            26.3
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Morigaon",
+                "headquarters": "Morigaon",
+                "population": 957000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            92.0,
+                            26.4
+                        ],
+                        [
+                            92.0,
+                            26.0
+                        ],
+                        [
+                            92.5,
+                            26.0
+                        ],
+                        [
+                            92.5,
+                            26.4
+                        ],
+                        [
+                            92.0,
+                            26.4
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Hojai",
+                "headquarters": "Sankardev Nagar",
+                "population": 931000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            92.7,
+                            26.1
+                        ],
+                        [
+                            92.7,
+                            25.8
+                        ],
+                        [
+                            93.1,
+                            25.8
+                        ],
+                        [
+                            93.1,
+                            26.1
+                        ],
+                        [
+                            92.7,
+                            26.1
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Karbi Anglong",
+                "headquarters": "Diphu",
+                "population": 956000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            93.0,
+                            26.3
+                        ],
+                        [
+                            93.0,
+                            25.5
+                        ],
+                        [
+                            93.8,
+                            25.5
+                        ],
+                        [
+                            93.8,
+                            26.3
+                        ],
+                        [
+                            93.0,
+                            26.3
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "West Karbi Anglong",
+                "headquarters": "Hamren",
+                "population": 313000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            92.3,
+                            26.0
+                        ],
+                        [
+                            92.3,
+                            25.6
+                        ],
+                        [
+                            93.0,
+                            25.6
+                        ],
+                        [
+                            93.0,
+                            26.0
+                        ],
+                        [
+                            92.3,
+                            26.0
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Dima Hasao",
+                "headquarters": "Haflong",
+                "population": 214000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            93.0,
+                            25.5
+                        ],
+                        [
+                            93.0,
+                            24.8
+                        ],
+                        [
+                            93.8,
+                            24.8
+                        ],
+                        [
+                            93.8,
+                            25.5
+                        ],
+                        [
+                            93.0,
+                            25.5
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Cachar",
+                "headquarters": "Silchar",
+                "population": 1736000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            92.6,
+                            25.0
+                        ],
+                        [
+                            92.6,
+                            24.5
+                        ],
+                        [
+                            93.2,
+                            24.5
+                        ],
+                        [
+                            93.2,
+                            25.0
+                        ],
+                        [
+                            92.6,
+                            25.0
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Karimganj",
+                "headquarters": "Karimganj",
+                "population": 1228000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            92.2,
+                            24.9
+                        ],
+                        [
+                            92.2,
+                            24.5
+                        ],
+                        [
+                            92.7,
+                            24.5
+                        ],
+                        [
+                            92.7,
+                            24.9
+                        ],
+                        [
+                            92.2,
+                            24.9
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Hailakandi",
+                "headquarters": "Hailakandi",
+                "population": 659000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            92.4,
+                            24.7
+                        ],
+                        [
+                            92.4,
+                            24.3
+                        ],
+                        [
+                            92.8,
+                            24.3
+                        ],
+                        [
+                            92.8,
+                            24.7
+                        ],
+                        [
+                            92.4,
+                            24.7
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Charaideo",
+                "headquarters": "Sonari",
+                "population": 540000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            94.9,
+                            27.2
+                        ],
+                        [
+                            94.9,
+                            26.9
+                        ],
+                        [
+                            95.3,
+                            26.9
+                        ],
+                        [
+                            95.3,
+                            27.2
+                        ],
+                        [
+                            94.9,
+                            27.2
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "district": "Tamulpur",
+                "headquarters": "Tamulpur",
+                "population": 420000
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            91.6,
+                            26.9
+                        ],
+                        [
+                            91.6,
+                            26.6
+                        ],
+                        [
+                            92.1,
+                            26.6
+                        ],
+                        [
+                            92.1,
+                            26.9
+                        ],
+                        [
+                            91.6,
+                            26.9
+                        ]
+                    ]
+                ]
+            }
+        }
+    ]
+}

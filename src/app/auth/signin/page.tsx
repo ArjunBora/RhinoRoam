@@ -90,10 +90,21 @@ function SignInForm() {
         <div className="w-full max-w-md">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 mb-8">
-                <div className="w-12 h-12 rounded-xl bg-gradient-heritage flex items-center justify-center">
-                    <Compass className="w-6 h-6 text-white" />
-                </div>
-                <span className="text-2xl font-bold font-heading">GUenARK</span>
+                <Image
+                    src="/logo.png"
+                    alt="RhinoRoam Logo"
+                    width={48}
+                    height={48}
+                    className="object-contain"
+                    unoptimized
+                />
+                <Image
+                    src="/name-style.png"
+                    alt="RhinoRoam"
+                    width={140}
+                    height={32}
+                    className="object-contain"
+                />
             </Link>
 
             {/* Heading */}
@@ -119,7 +130,7 @@ function SignInForm() {
                     <div>
                         <label className="block text-sm font-medium mb-2">Name</label>
                         <div className="relative">
-                            <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--text-muted)]" />
+                            <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--text-muted)] pointer-events-none" />
                             <input
                                 type="text"
                                 value={formData.name}
@@ -127,7 +138,7 @@ function SignInForm() {
                                     setFormData({ ...formData, name: e.target.value })
                                 }
                                 placeholder="Your name"
-                                className="input-field pl-12"
+                                className="signin-input"
                                 required={!isLogin}
                             />
                         </div>
@@ -137,7 +148,7 @@ function SignInForm() {
                 <div>
                     <label className="block text-sm font-medium mb-2">Email</label>
                     <div className="relative">
-                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--text-muted)]" />
+                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--text-muted)] pointer-events-none" />
                         <input
                             type="email"
                             value={formData.email}
@@ -145,7 +156,7 @@ function SignInForm() {
                                 setFormData({ ...formData, email: e.target.value })
                             }
                             placeholder="you@example.com"
-                            className="input-field pl-12"
+                            className="signin-input"
                             required
                         />
                     </div>
@@ -154,7 +165,7 @@ function SignInForm() {
                 <div>
                     <label className="block text-sm font-medium mb-2">Password</label>
                     <div className="relative">
-                        <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--text-muted)]" />
+                        <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--text-muted)] pointer-events-none" />
                         <input
                             type={showPassword ? "text" : "password"}
                             value={formData.password}
@@ -162,7 +173,7 @@ function SignInForm() {
                                 setFormData({ ...formData, password: e.target.value })
                             }
                             placeholder="••••••••"
-                            className="input-field pl-12 pr-12"
+                            className="signin-input"
                             required
                             minLength={6}
                         />
@@ -287,8 +298,8 @@ export default function SignInPage() {
             {/* Right Side - Image */}
             <div className="hidden lg:block lg:w-1/2 relative">
                 <Image
-                    src="https://images.unsplash.com/photo-1590059390047-f5e67e4d2c6c?w=1600&q=80"
-                    alt="Heritage"
+                    src="https://images.unsplash.com/photo-1587595431973-160d0d94add1?q=80&w=1600&auto=format&fit=crop"
+                    alt="Tea Garden"
                     fill
                     className="object-cover"
                 />

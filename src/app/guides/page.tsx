@@ -372,20 +372,24 @@ export default function GuidesPage() {
 // Guide Card Component
 function GuideCard({ guide }: { guide: typeof guides[0] }) {
     return (
-        <div className="heritage-card p-5">
+        <div
+            className="heritage-card p-5 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+            style={{ border: '1px solid var(--border-light)' }}
+        >
             {/* Header */}
             <div className="flex items-start gap-4 mb-4">
                 <div className="relative">
                     <Image
                         src={guide.avatar}
                         alt={guide.name}
-                        width={64}
-                        height={64}
-                        className="rounded-full object-cover"
+                        width={72}
+                        height={72}
+                        className="rounded-full object-cover ring-2 ring-offset-2"
+                        style={{ '--tw-ring-color': 'var(--tea-garden)' } as React.CSSProperties}
                     />
                     {guide.verified && (
                         <div
-                            className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full flex items-center justify-center text-white"
+                            className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full flex items-center justify-center text-white shadow-md"
                             style={{ background: 'var(--tea-garden)' }}
                         >
                             <Check className="w-3 h-3" />
@@ -394,14 +398,19 @@ function GuideCard({ guide }: { guide: typeof guides[0] }) {
                 </div>
                 <div className="flex-1">
                     <div className="flex items-center gap-2">
-                        <h3 className="font-semibold">{guide.name}</h3>
+                        <h3 className="font-semibold text-lg">{guide.name}</h3>
                         {guide.superguide && (
-                            <Award className="w-4 h-4" style={{ color: 'var(--muga-gold)' }} />
+                            <span
+                                className="px-2 py-0.5 text-xs font-medium rounded-full"
+                                style={{ background: 'linear-gradient(135deg, #D4AF37, #B8860B)', color: 'white' }}
+                            >
+                                ⭐ Superguide
+                            </span>
                         )}
                     </div>
                     <div className="flex items-center gap-1 text-sm" style={{ color: 'var(--text-muted)' }}>
                         <MapPin className="w-3 h-3" />
-                        {guide.location}
+                        {guide.location}, {guide.district}
                     </div>
                     <div className="flex items-center gap-2 mt-1">
                         <Star className="w-4 h-4" style={{ color: 'var(--muga-gold)', fill: 'var(--muga-gold)' }} />
@@ -418,8 +427,12 @@ function GuideCard({ guide }: { guide: typeof guides[0] }) {
                 {guide.expertiseLabels.map((label, idx) => (
                     <span
                         key={idx}
-                        className="text-xs px-2 py-1 rounded-full"
-                        style={{ background: 'var(--bg-secondary)' }}
+                        className="text-xs px-3 py-1.5 rounded-full font-medium"
+                        style={{
+                            background: 'var(--gradient-tea)',
+                            color: 'white',
+                            opacity: 0.9
+                        }}
                     >
                         {label}
                     </span>
@@ -434,51 +447,65 @@ function GuideCard({ guide }: { guide: typeof guides[0] }) {
             {/* Quick Stats */}
             <div className="grid grid-cols-3 gap-2 mb-4 text-center text-sm">
                 <div
-                    className="p-2 rounded-lg"
+                    className="p-3 rounded-xl"
                     style={{ background: 'var(--bg-secondary)' }}
                 >
-                    <p className="font-semibold">{guide.yearsExperience}</p>
-                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Years</p>
+                    <p className="font-bold text-lg" style={{ color: 'var(--tea-deep)' }}>{guide.yearsExperience}</p>
+                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Years Exp</p>
                 </div>
                 <div
-                    className="p-2 rounded-lg"
+                    className="p-3 rounded-xl"
                     style={{ background: 'var(--bg-secondary)' }}
                 >
-                    <p className="font-semibold">{guide.toursCompleted}</p>
+                    <p className="font-bold text-lg" style={{ color: 'var(--tea-deep)' }}>{guide.toursCompleted}</p>
                     <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Tours</p>
                 </div>
                 <div
-                    className="p-2 rounded-lg"
+                    className="p-3 rounded-xl"
                     style={{ background: 'var(--bg-secondary)' }}
                 >
-                    <p className="font-semibold">{guide.languages.length}</p>
+                    <p className="font-bold text-lg" style={{ color: 'var(--tea-deep)' }}>{guide.languages.length}</p>
                     <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Languages</p>
                 </div>
             </div>
 
-            {/* Languages */}
-            <div className="flex items-center gap-2 text-sm mb-4">
+            {/* Languages Row */}
+            <div className="flex items-center gap-2 text-sm mb-4 p-2 rounded-lg" style={{ background: 'var(--bg-secondary)' }}>
                 <Globe className="w-4 h-4" style={{ color: 'var(--tea-garden)' }} />
                 <span style={{ color: 'var(--text-secondary)' }}>
                     {guide.languages.join(', ')}
                 </span>
             </div>
 
-            {/* Footer */}
+            {/* Footer with Price and Actions */}
             <div
-                className="pt-4 flex items-center justify-between"
-                style={{ borderTop: '1px solid var(--border-light)' }}
+                className="pt-4 border-t"
+                style={{ borderColor: 'var(--border-light)' }}
             >
-                <div>
-                    <span className="text-xl font-bold" style={{ color: 'var(--tea-deep)' }}>
-                        ₹{guide.pricePerDay.toLocaleString()}
-                    </span>
-                    <span className="text-sm" style={{ color: 'var(--text-muted)' }}> / day</span>
+                <div className="flex items-center justify-between mb-3">
+                    <div>
+                        <span className="text-2xl font-bold" style={{ color: 'var(--tea-deep)' }}>
+                            ₹{guide.pricePerDay.toLocaleString()}
+                        </span>
+                        <span className="text-sm" style={{ color: 'var(--text-muted)' }}> / day</span>
+                    </div>
+                    <div className="text-xs px-2 py-1 rounded-full" style={{ background: 'var(--bg-secondary)', color: 'var(--text-muted)' }}>
+                        <Clock className="w-3 h-3 inline mr-1" />
+                        {guide.responseTime}
+                    </div>
                 </div>
-                <button className="btn-primary text-sm py-2">
-                    <MessageCircle className="w-4 h-4" />
-                    Contact
-                </button>
+                <div className="flex gap-2">
+                    <button
+                        className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium transition-all hover:opacity-90"
+                        style={{ background: 'var(--bg-secondary)', color: 'var(--text-primary)' }}
+                    >
+                        View Profile
+                    </button>
+                    <button className="flex-1 btn-primary text-sm py-2.5 flex items-center justify-center gap-2">
+                        <MessageCircle className="w-4 h-4" />
+                        Contact
+                    </button>
+                </div>
             </div>
         </div>
     );
